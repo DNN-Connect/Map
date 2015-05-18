@@ -13,7 +13,7 @@
       <license src="License.txt"></license>
       <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
       <dependencies>
-        <dependency type="CoreVersion">07.00.02</dependency>
+        <dependency type="CoreVersion">07.04.00</dependency>
       </dependencies>
       
       <components>
@@ -44,18 +44,17 @@
 
         <component type="Module">
           <desktopModule>
-            <moduleName>Map</moduleName>
-            <foldername>Map</foldername>
-            <businessControllerClass>Connect.DNN.Modules.Map.Components.FeatureController</businessControllerClass>
+            <moduleName>Connect_Map</moduleName>
+            <foldername>Connect/Map</foldername>
             <supportedFeatures />
             <moduleDefinitions>
               <moduleDefinition>
-                <friendlyName>Map</friendlyName>
+                <friendlyName>Connect Map</friendlyName>
                 <defaultCacheTime>0</defaultCacheTime>
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>DesktopModules/Map/View.ascx</controlSrc>
+                    <controlSrc>Connect.DNN.Modules.Map.ModuleHome, CONNECT.DNN.MODULES.MAP</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>
@@ -64,19 +63,8 @@
                     <viewOrder>0</viewOrder>
                   </moduleControl>
                   <moduleControl>
-                    <controlKey>Edit</controlKey>
-                    <controlSrc>DesktopModules/Map/Edit.ascx</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Edit Content</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                    <supportsPopUps>True</supportsPopUps>
-                  </moduleControl>
-                  <moduleControl>
                     <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Map/Settings.ascx</controlSrc>
+                    <controlSrc>DesktopModules/Connect/Map/Settings.ascx</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle>Map Settings</controlTitle>
                     <controlType>Edit</controlType>
@@ -85,6 +73,9 @@
                     <viewOrder>0</viewOrder>
                   </moduleControl>
                 </moduleControls>
+               <permissions>
+                <permission code="CONNECT_MAP_MODULE" key="POINTER" name="Map Pointers"/>
+               </permissions>
               </moduleDefinition>
             </moduleDefinitions>
           </desktopModule>
@@ -92,7 +83,7 @@
         <component type="Assembly">
           <assemblies>
             <assembly>
-              <name>Map.dll</name>
+              <name>Connect.DNN.Modules.Map.dll</name>
               <path>bin</path>
             </assembly>
           </assemblies>
