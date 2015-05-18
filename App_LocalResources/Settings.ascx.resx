@@ -112,24 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ControlTitle_settings.Text" xml:space="preserve">
     <value>Map Settings</value>
   </data>
-  <data name="lblSetting1.Help" xml:space="preserve">
-    <value>Put your value for Setting 1 here.</value>
+  <data name="lblView.Help" xml:space="preserve">
+    <value>Select default view to render</value>
   </data>
-  <data name="lblSetting1.Text" xml:space="preserve">
-    <value>Setting One</value>
-  </data>
-  <data name="lblSetting2.Help" xml:space="preserve">
-    <value>Put your value for Setting 2 here.</value>
-  </data>
-  <data name="lblSetting2.Text" xml:space="preserve">
-    <value>Setting Two</value>
+  <data name="lblView.Text" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

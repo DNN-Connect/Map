@@ -1,68 +1,57 @@
-﻿/*
-' Copyright (c) 2015  DNN Connect
-'  All rights reserved.
-' 
-' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-' DEALINGS IN THE SOFTWARE.
-' 
-*/
-
-using System;
+﻿using System;
+using System.IO;
+using System.Web.UI.WebControls;
+using Connect.DNN.Modules.Map.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 
 namespace Connect.DNN.Modules.Map
 {
-    /// -----------------------------------------------------------------------------
-    /// <summary>
-    /// The Settings class manages Module Settings
-    /// 
-    /// Typically your settings control would be used to manage settings for your module.
-    /// There are two types of settings, ModuleSettings, and TabModuleSettings.
-    /// 
-    /// ModuleSettings apply to all "copies" of a module on a site, no matter which page the module is on. 
-    /// 
-    /// TabModuleSettings apply only to the current module on the current page, if you copy that module to
-    /// another page the settings are not transferred.
-    /// 
-    /// If you happen to save both TabModuleSettings and ModuleSettings, TabModuleSettings overrides ModuleSettings.
-    /// 
-    /// Below we have some examples of how to access these settings but you will need to uncomment to use.
-    /// 
-    /// Because the control inherits from MapSettingsBase you have access to any custom properties
-    /// defined there, as well as properties from DNN such as PortalId, ModuleId, TabId, UserId and many more.
-    /// </summary>
-    /// -----------------------------------------------------------------------------
-    public partial class Settings : MapModuleSettingsBase
+    public partial class Settings : ModuleSettingsBase
     {
+
+        #region Properties
+        private ModuleSettings _settings;
+        public ModuleSettings ModSettings
+        {
+            get
+            {
+                if (_settings == null)
+                {
+                    _settings = Common.ModuleSettings.GetSettings(ModuleConfiguration);
+                }
+                return _settings;
+            }
+            set { _settings = value; }
+        }
+        #endregion
+
         #region Base Method Implementations
 
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// LoadSettings loads the settings from the Database and displays them
-        /// </summary>
-        /// -----------------------------------------------------------------------------
         public override void LoadSettings()
         {
             try
             {
-                if (Page.IsPostBack == false)
+                if (!IsPostBack)
                 {
-                    //Check for existing settings and use those on this page
-                    //Settings["SettingName"]
-
-                    /* uncomment to load saved settings in the text boxes
-                    if(Settings.Contains("Setting1"))
-                        txtSetting1.Text = Settings["Setting1"].ToString();
-			
-                    if (Settings.Contains("Setting2"))
-                        txtSetting2.Text = Settings["Setting2"].ToString();
-
-                    */
-
+                    ddView.Items.Clear();
+                    ddView.Items.Add(new ListItem("Home", "Home"));
+                    DirectoryInfo viewDir = new DirectoryInfo(Server.MapPath("~/DesktopModules/Connect/Map/Views"));
+                    foreach (FileInfo f in viewDir.GetFiles("*.cshtml"))
+                    {
+                        string vwName = Path.GetFileNameWithoutExtension(f.Name);
+                        if (vwName.ToLower() != "home")
+                        {
+                            ddView.Items.Add(new ListItem(vwName, vwName));
+                        }
+                    }
+                    try
+                    {
+                        ddView.Items.FindByValue(ModSettings.View).Selected = true;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -71,25 +60,12 @@ namespace Connect.DNN.Modules.Map
             }
         }
 
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// UpdateSettings saves the modified settings to the Database
-        /// </summary>
-        /// -----------------------------------------------------------------------------
         public override void UpdateSettings()
         {
             try
             {
-                var modules = new ModuleController();
-
-                //the following are two sample Module Settings, using the text boxes that are commented out in the ASCX file.
-                //module settings
-                //modules.UpdateModuleSetting(ModuleId, "Setting1", txtSetting1.Text);
-                //modules.UpdateModuleSetting(ModuleId, "Setting2", txtSetting2.Text);
-
-                //tab module settings
-                //modules.UpdateTabModuleSetting(TabModuleId, "Setting1",  txtSetting1.Text);
-                //modules.UpdateTabModuleSetting(TabModuleId, "Setting2",  txtSetting2.Text);
+                ModSettings.View = ddView.SelectedValue;
+                ModSettings.SaveSettings();
             }
             catch (Exception exc) //Module failed to load
             {
