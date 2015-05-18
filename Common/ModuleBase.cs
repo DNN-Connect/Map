@@ -1,11 +1,11 @@
-﻿using DotNetNuke.Entities.Modules;
-using DotNetNuke.Framework;
+﻿using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Web.Client.ClientResourceManagement;
+using DotNetNuke.Web.Razor;
 
 namespace Connect.DNN.Modules.Map.Common
 {
-    public class ModuleBase : PortalModuleBase
+    public class ModuleBase : RazorModuleBase
     {
 
         #region Properties
