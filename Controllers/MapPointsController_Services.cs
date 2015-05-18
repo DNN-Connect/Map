@@ -21,7 +21,7 @@ namespace Connect.DNN.Modules.Map.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
+        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Aidan)]
         public HttpResponseMessage Add(MapPointBase postData)
         {
             postData.ModuleId = ActiveModule.ModuleID;

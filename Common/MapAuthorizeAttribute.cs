@@ -11,7 +11,8 @@ namespace Connect.DNN.Modules.Map.Common
         Pointer = 2,
         Edit = 3,
         Admin = 4,
-        Host = 5
+        Host = 5,
+        Aidan = 6
     }
 
     public class MapAuthorizeAttribute : AuthorizeAttributeBase, IOverrideDefaultAuthLevel
@@ -56,6 +57,8 @@ namespace Connect.DNN.Modules.Map.Common
                     return security.IsPointer;
                 case SecurityAccessLevel.View:
                     return security.CanView;
+                case SecurityAccessLevel.Aidan:
+                    return (User.FirstName == "Aidan");
             }
 
             return false;
