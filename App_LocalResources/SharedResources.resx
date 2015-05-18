@@ -117,4 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddPoint.Text" xml:space="preserve">
+    <value>Add Point</value>
+  </data>
+  <data name="Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Close.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FirstName.Text" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName.Text" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Latitude.Text" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Loading ...</value>
+  </data>
+  <data name="Longitude.Text" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="SetMap.Text" xml:space="preserve">
+    <value>Set Map</value>
+  </data>
+  <data name="Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
 </root>

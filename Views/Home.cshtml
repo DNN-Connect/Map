@@ -3,6 +3,43 @@
 
 <div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
 
+<div class="modal fade" id="mapPopup">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">@Html.GetLocalizedString("AddPoint")</h4>
+   </div>
+   <div class="modal-body">
+    <div class="panel-body form-horizontal">
+     <div class="form-group">
+      <label for="pointLatitude" class="col-sm-2 control-label">@Html.GetLocalizedString("Latitude")</label>
+      <div class="col-sm-10">
+       <input type="text" class="form-control" id="pointLatitude" readonly />
+      </div>
+     </div>
+     <div class="form-group">
+      <label for="pointLongitude" class="col-sm-2 control-label">@Html.GetLocalizedString("Longitude")</label>
+      <div class="col-sm-10">
+       <input type="text" class="form-control" id="pointLongitude" readonly />
+      </div>
+     </div>
+    </div>
+    <div class="panel-body">
+     <div class="form-group">
+      <label for="pointText" class="control-label">@Html.GetLocalizedString("Text")</label>
+      <textarea id="pointText" class="form-control"></textarea>
+     </div>
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">@Html.GetLocalizedString("Cancel")</button>
+    <button type="button" class="btn btn-primary" id="cmdSubmitMapPoint">@Html.GetLocalizedString("Submit")</button>
+   </div>
+  </div>
+ </div>
+</div>
+
 <div class="map_statusbar" id="mapStatus">
  <div>@Html.GetLocalizedString("Loading")</div>
  <div>Error Text ...</div>
@@ -22,6 +59,20 @@
    connectMapService.getDataPoints(function(data) {
     $.each(data, function (index, item) {
      addPointToMap(map, item.Latitude, item.Longitude, item.Message, item.CreatedByUser, item.CreatedByUserID);
+    });
+   });
+
+   google.maps.event.addListener(map, 'click', function (e) {
+    $('#pointLatitude').val(e.latLng.lat());
+    $('#pointLongitude').val(e.latLng.lng());
+    $('#mapPopup').modal();
+   });
+
+   $('#cmdSubmitMapPoint').click(function() {
+    connectMapService.addPoint($('#pointLatitude').val(), $('#pointLongitude').val(), $('#pointText').val(), function(data) {
+     addPointToMap(map, data.Latitude, data.Longitude, data.Message, data.CreatedByUser, data.CreatedByUserID);
+     $('#pointText').val('');
+     $('#mapPopup').modal('hide');
     });
    });
 

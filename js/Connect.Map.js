@@ -27,6 +27,9 @@ function ConnectMapService($, settings, mid) {
 	this.getDataPoints = function (success) {
 		this.ajaxCall('GET', 'MapPoints', 'List', null, null, success);
 	}
+	this.addPoint = function (lat, lng, msg, success) {
+		this.ajaxCall('POST', 'MapPoints', 'Add', null, { Latitude: lat, Longitude: lng, Message: msg }, success);
+	}
 }
 
 function showLoading() {
