@@ -1,0 +1,23 @@
+﻿<h3>Map</h3>
+<p class="Contributor">
+	DNN Connect <br />
+	<a href="mailto:no-reply@dnn-connect.org">no-reply@dnn-connect.org</a><br />
+	<a href=http://dnn-connect.org>http://dnn-connect.org</a><br />
+</p>
+<hr/>
+<div class="License">
+	<h3>About the Map</h3>
+	<p class="Owner">
+		<b>Version CHANGEME</b><br /><br />
+	</p>
+	<p>Description about version.</p>
+	
+	<h4>Bug Fixes</h4>
+	<ul>
+			<li>List</li>
+			<li>of</li>
+			<li>bug</li>
+			<li>fixes</li>
+	</ul>
+	
+</div>
