@@ -3,9 +3,12 @@
 
 <div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
 
+@if (Security.CanEdit)
+{
  <div>
   <a href="#" id="cmdSetMap" class="btn btn-default">@Html.GetLocalizedString("SetMap")</a>
  </div>
+}
 
 <div class="modal fade" id="mapPopup2" tabindex="-1" role="dialog" aria-labelledby="cmModalLabel" aria-hidden="true"></div>
 
@@ -68,6 +71,9 @@
     });
    });
 
+   @if (Security.IsPointer)
+   {
+    <text>
    google.maps.event.addListener(map, 'click', function (e) {
     $('#pointLatitude').val(e.latLng.lat());
     $('#pointLongitude').val(e.latLng.lng());
@@ -81,12 +87,19 @@
      $('#mapPopup').modal('hide');
     });
    });
+   </text>
+   }
 
+   @if (Security.CanEdit)
+   {
+    <text>
    $('#cmdSetMap').click(function() {
     connectMapService.setMap(map.getCenter().lat(), map.getCenter().lng(), map.getZoom(), function () {
      alert('Settings Saved');
     });
    });
+   </text>
+   }
 
   });
 
