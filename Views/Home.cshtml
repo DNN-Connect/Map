@@ -3,6 +3,11 @@
 
 <div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
 
+<div class="map_statusbar" id="mapStatus">
+ <div>@Html.GetLocalizedString("Loading")</div>
+ <div>Error Text ...</div>
+</div>
+
 <script type="text/javascript">
  (function ($, Sys) {
   $(document).ready(function () {
