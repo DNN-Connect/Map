@@ -3,6 +3,8 @@
 
 <div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
 
+<div class="modal fade" id="mapPopup2" tabindex="-1" role="dialog" aria-labelledby="cmModalLabel" aria-hidden="true"></div>
+
 <div class="modal fade" id="mapPopup">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -80,7 +82,7 @@
 
   function addPointToMap(map, lat, lng, msg, usr, usrId) {
    var infowindow = new google.maps.InfoWindow({
-    content: msg + '<br />' + usr
+    content: msg + '<br /><a href="#" onclick="showUser(' + usrId + ');return false;">' + usr + '</a>'
    });
    var marker = new google.maps.Marker({
     position: new google.maps.LatLng(lat, lng),
@@ -92,4 +94,11 @@
   }
 
  }(jQuery, window.Sys));
+
+ function showUser(userId) {
+  connectMapService.showUser(userId, function(data) {
+   $('#mapPopup2').html(data).modal();
+  });
+ }
+
 </script>

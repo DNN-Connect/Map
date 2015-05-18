@@ -92,6 +92,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\ModuleSettings.cs" />
+    <Compile Include="Common\RazorControl.cs" />
     <Compile Include="Common\RouteMapper.cs" />
     <Compile Include="Controllers\MapPointsController.cs" />
     <Compile Include="Controllers\MapPointsController_Services.cs" />
@@ -132,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ServiceViews\UserDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,23 @@
+﻿@inherits Connect.DNN.Modules.Map.Common.MapWebPage<DotNetNuke.Entities.Users.UserInfo>
+
+<div class="modal-dialog">
+ <div class="modal-content">
+  <div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+   <h4 class="modal-title">@Model.DisplayName</h4>
+  </div>
+  <div class="modal-body">
+   <dl class="dl-horizontal">
+    <dt>@Html.GetLocalizedString("FirstName")</dt>
+    <dd>@Model.FirstName</dd>
+    <dt>@Html.GetLocalizedString("LastName")</dt>
+    <dd>@Model.LastName</dd>
+    <dt>@Html.GetLocalizedString("Email")</dt>
+    <dd>@Model.Email</dd>
+   </dl>
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">@Html.GetLocalizedString("Close")</button>
+  </div>
+ </div>
+</div>
