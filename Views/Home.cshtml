@@ -14,6 +14,26 @@
     draggableCursor:@(Security.IsPointer ? "'crosshair'" : "'grabbing'")
     });
 
+   connectMapService.getDataPoints(function(data) {
+    $.each(data, function (index, item) {
+     addPointToMap(map, item.Latitude, item.Longitude, item.Message, item.CreatedByUser, item.CreatedByUserID);
+    });
+   });
+
   });
+
+  function addPointToMap(map, lat, lng, msg, usr, usrId) {
+   var infowindow = new google.maps.InfoWindow({
+    content: msg + '<br />' + usr
+   });
+   var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(lat, lng),
+    map: map
+   });
+   google.maps.event.addListener(marker, 'click', function () {
+    infowindow.open(map, marker);
+   });
+  }
+
  }(jQuery, window.Sys));
 </script>

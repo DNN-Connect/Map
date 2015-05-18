@@ -91,7 +91,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Common\ModuleSettings.cs" />
+    <Compile Include="Common\RouteMapper.cs" />
     <Compile Include="Controllers\MapPointsController.cs" />
+    <Compile Include="Controllers\MapPointsController_Services.cs" />
     <Compile Include="Data\RepositoryImpl.cs" />
     <Compile Include="Models\MapPoints\MapPoint.cs" />
     <Compile Include="Models\MapPoints\MapPointBase.cs" />
@@ -110,6 +112,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\Connect.Map.js" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />
   </ItemGroup>

@@ -19,7 +19,7 @@ namespace Connect.DNN.Modules.Map.Common
         }
 
         private ModuleSettings _settings;
-        public new ModuleSettings Settings
+        public ModuleSettings Settings
         {
             get { return _settings ?? (_settings = ModuleSettings.GetSettings(ModuleContext.Configuration)); }
         }
@@ -34,6 +34,9 @@ namespace Connect.DNN.Modules.Map.Common
                 ServicesFramework.Instance.RequestAjaxScriptSupport();
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
                 ClientResourceManager.RegisterScript(Page, "http://maps.googleapis.com/maps/api/js",70);
+                AddJavascriptFile("Connect.Map.js", 70);
+                string script = "(function($){$(document).ready(function(){ connectMapService = new ConnectMapService($, {}, " + ModuleContext.ModuleId + ") })})(jQuery);";
+                Page.ClientScript.RegisterClientScriptBlock(script.GetType(), ID + "_service", script, true);
                 Context.Items["MapServiceAdded"] = true;
             }
 
