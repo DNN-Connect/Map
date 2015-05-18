@@ -3,6 +3,10 @@
 
 <div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
 
+ <div>
+  <a href="#" id="cmdSetMap" class="btn btn-default">@Html.GetLocalizedString("SetMap")</a>
+ </div>
+
 <div class="modal fade" id="mapPopup2" tabindex="-1" role="dialog" aria-labelledby="cmModalLabel" aria-hidden="true"></div>
 
 <div class="modal fade" id="mapPopup">
@@ -75,6 +79,12 @@
      addPointToMap(map, data.Latitude, data.Longitude, data.Message, data.CreatedByUser, data.CreatedByUserID);
      $('#pointText').val('');
      $('#mapPopup').modal('hide');
+    });
+   });
+
+   $('#cmdSetMap').click(function() {
+    connectMapService.setMap(map.getCenter().lat(), map.getCenter().lng(), map.getZoom(), function () {
+     alert('Settings Saved');
     });
    });
 

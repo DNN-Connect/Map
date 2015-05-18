@@ -10,7 +10,7 @@ using DotNetNuke.Web.Api;
 namespace Connect.DNN.Modules.Map.Controllers
 {
 
-    public partial class MapPointsController : DnnApiController
+    public partial class MapPointsController : MapApiController
     {
 
         #region Service Methods
@@ -42,6 +42,25 @@ namespace Connect.DNN.Modules.Map.Controllers
             StringContent content = new StringContent(ctl.RenderObject(u), Encoding.UTF8, "text/html");
             HttpResponseMessage res = new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
             return res;
+        }
+
+        public class SetMapDTO
+        {
+            public double Lat { get; set; }
+            public double Lng { get; set; }
+            public int Zoom { get; set; }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Edit)]
+        public HttpResponseMessage SetMap(SetMapDTO postData)
+        {
+            Settings.MapOriginLat = postData.Lat;
+            Settings.MapOriginLong = postData.Lng;
+            Settings.Zoom = postData.Zoom;
+            Settings.SaveSettings();
+            return Request.CreateResponse(HttpStatusCode.OK, "");
         }
         #endregion
 

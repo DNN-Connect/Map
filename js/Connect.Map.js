@@ -33,6 +33,9 @@ function ConnectMapService($, settings, mid) {
 	this.showUser = function (userId, success, fail) {
 		this.ajaxCall('GET', 'MapPoints', 'GetUser', userId, null, success, fail);
 	}
+	this.setMap = function (lat, lng, zoom, success) {
+		this.ajaxCall('POST', 'MapPoints', 'SetMap', null, { Lat: lat, Lng: lng, Zoom: zoom }, success);
+	}
 }
 
 function showLoading() {
