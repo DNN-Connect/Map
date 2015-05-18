@@ -1,8 +1,8 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Connect.DNN.Modules.Map.Common;
 using Connect.DNN.Modules.Map.Models.MapPoints;
-using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
 
 namespace Connect.DNN.Modules.Map.Controllers
@@ -13,7 +13,7 @@ namespace Connect.DNN.Modules.Map.Controllers
 
         #region Service Methods
         [HttpGet]
-        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
+        [MapAuthorize(SecurityLevel = SecurityAccessLevel.View)]
         public HttpResponseMessage List()
         {
             return Request.CreateResponse(HttpStatusCode.OK, GetMapPoints(ActiveModule.ModuleID));
@@ -21,7 +21,7 @@ namespace Connect.DNN.Modules.Map.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DnnModuleAuthorize(PermissionKey = "POINTER", AccessLevel = SecurityAccessLevel.Edit)]
+        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
         public HttpResponseMessage Add(MapPointBase postData)
         {
             postData.ModuleId = ActiveModule.ModuleID;

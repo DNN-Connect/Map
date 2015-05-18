@@ -86,6 +86,7 @@
     <Compile Include="Common\AuditableEntity.cs" />
     <Compile Include="Common\ContextSecurity.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\MapAuthorizeAttribute.cs" />
     <Compile Include="Common\MapWebPage.cs" />
     <Compile Include="Common\ModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
