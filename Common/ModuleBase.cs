@@ -33,6 +33,7 @@ namespace Connect.DNN.Modules.Map.Common
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
                 ServicesFramework.Instance.RequestAjaxScriptSupport();
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
+                ClientResourceManager.RegisterScript(Page, "http://maps.googleapis.com/maps/api/js",70);
                 Context.Items["MapServiceAdded"] = true;
             }
 

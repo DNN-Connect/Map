@@ -1,1 +1,19 @@
-﻿<h1>Hello DNN Connect</h1>
+﻿@inherits Connect.DNN.Modules.Map.Common.MapWebPage
+<h1>Hello DNN Connect</h1>
+
+<div id="googleMap" style="width: @Settings.MapWidth; height: @Settings.MapHeight;"></div>
+
+<script type="text/javascript">
+ (function ($, Sys) {
+  $(document).ready(function () {
+
+   var map = new google.maps.Map(document.getElementById("googleMap"), {
+    center: new google.maps.LatLng(@Settings.MapOriginLat, @Settings.MapOriginLong),
+    zoom: @Settings.Zoom,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggableCursor:@(Security.IsPointer ? "'crosshair'" : "'grabbing'")
+    });
+
+  });
+ }(jQuery, window.Sys));
+</script>

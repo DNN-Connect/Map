@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Common\ContextSecurity.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\MapWebPage.cs" />
     <Compile Include="Common\ModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
