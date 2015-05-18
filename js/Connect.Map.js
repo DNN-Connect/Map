@@ -4,11 +4,12 @@ function ConnectMapService($, settings, mid) {
 	var moduleId = mid;
 	var baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/Map');
 
-	this.getDataPoints = function (success, fail) {
+	this.ajaxCall = function (type, controller, action, id, data, success, fail) {
 		$.ajax({
-			type: 'GET',
-			url: baseServicepath + 'MapPoints/List',
-			beforeSend: $.dnnSF(moduleId).setModuleHeaders
+			type: type,
+			url: baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
+			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
+			data: data
 		}).done(function (retdata) {
 			if (success != undefined) {
 				success(retdata);
@@ -19,4 +20,9 @@ function ConnectMapService($, settings, mid) {
 			}
 		});
 	}
+
+	this.getDataPoints = function (success) {
+		this.ajaxCall('GET', 'MapPoints', 'List', null, null, success);
+	}
+
 }
