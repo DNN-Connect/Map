@@ -1,0 +1,44 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_Map_MapPoints(
+	[MapPointId] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleId] [int] NOT NULL,
+	[Latitude] [real] NOT NULL,
+	[Longitude] [real] NOT NULL,
+	[Message] [nvarchar](2000) NULL,
+	[CreatedByUserID] [int] NOT NULL,
+	[CreatedOnDate] [datetime] NOT NULL,
+	[LastModifiedByUserID] [int] NOT NULL,
+	[LastModifiedOnDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Connect_Map_MapPoints] PRIMARY KEY CLUSTERED 
+(
+	[MapPointId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_Map_MapPoints
+AS
+SELECT
+ mp.*,
+ uc.DisplayName CreatedByUser,
+ um.DisplayName LastModifiedByUser
+FROM {databaseOwner}{objectQualifier}Connect_Map_MapPoints mp
+ LEFT JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=mp.CreatedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=mp.LastModifiedByUserID
+
+GO
+
+
+
