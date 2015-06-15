@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using DotNetNuke.Collections;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 
@@ -10,44 +9,28 @@ namespace Connect.DNN.Modules.Map.Common
     {
 
         #region Properties
-        private int ModuleId { get; set; }
-        private Hashtable Settings { get; set; }
+        internal ISettingsStore Store;
 
-        public string View { get; set; }
-        public double MapOriginLat { get; set; }
-        public double MapOriginLong { get; set; }
-        public int Zoom { get; set; }
-        public string MapWidth { get; set; }
-        public string MapHeight { get; set; }
-        public string Version { get; set; }
+        public string View { get { return Store.Get("Home"); } set { Store.Set(value); } }
+        public double MapOriginLat { get { return Store.Get(44.1); } set { Store.Set(value); } }
+        public double MapOriginLong { get { return Store.Get(3.07); } set { Store.Set(value); } }
+        public int Zoom { get { return Store.Get(8); } set { Store.Set(value); } }
+        public string MapWidth { get { return Store.Get("100%"); } set { Store.Set(value); } }
+        public string MapHeight { get { return Store.Get("500px"); } set { Store.Set(value); } }
+        public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
         #endregion
 
         #region .ctor
-        public ModuleSettings(ModuleInfo ctlModule)
+        public ModuleSettings(int moduleId, Hashtable settings)
         {
-            ModuleId = ctlModule.ModuleID;
-            Settings = ctlModule.ModuleSettings;
-            View = Settings.GetValueOrDefault<string>("View", "Home");
-            MapOriginLat = Settings.GetValueOrDefault<double>("MapOriginLat", 44.1);
-            MapOriginLong = Settings.GetValueOrDefault<double>("MapOriginLong", 3.07);
-            MapWidth = Settings.GetValueOrDefault<string>("MapWidth", "100%");
-            MapHeight = Settings.GetValueOrDefault<string>("MapHeight", "500px");
-            Zoom = Settings.GetValueOrDefault<int>("Zoom", 8);
-            Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
+            Store = new ModuleScopedSettings(moduleId, settings);
         }
         #endregion
 
         #region Public Members
         public void SaveSettings()
         {
-            ModuleController objModules = new ModuleController();
-            objModules.UpdateModuleSetting(ModuleId, "View", View);
-            objModules.UpdateModuleSetting(ModuleId, "MapOriginLat", MapOriginLat.ToString());
-            objModules.UpdateModuleSetting(ModuleId, "MapOriginLong", MapOriginLong.ToString());
-            objModules.UpdateModuleSetting(ModuleId, "MapWidth", MapWidth);
-            objModules.UpdateModuleSetting(ModuleId, "MapHeight", MapHeight);
-            objModules.UpdateModuleSetting(ModuleId, "Zoom", Zoom.ToString());
-            DataCache.SetCache(CacheKey(ModuleId), this);
+            Store.Save();
         }
 
         public static ModuleSettings GetSettings(ModuleInfo ctlModule)
@@ -63,7 +46,7 @@ namespace Connect.DNN.Modules.Map.Common
             }
             if (res == null)
             {
-                res = new ModuleSettings(ctlModule);
+                res = new ModuleSettings(ctlModule.ModuleID, ctlModule.ModuleSettings);
                 DataCache.SetCache(CacheKey(ctlModule.ModuleID), res);
             }
             return res;
