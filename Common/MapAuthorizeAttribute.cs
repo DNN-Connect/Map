@@ -11,8 +11,7 @@ namespace Connect.DNN.Modules.Map.Common
         Pointer = 2,
         Edit = 3,
         Admin = 4,
-        Host = 5,
-        Aidan = 6
+        Host = 5
     }
 
     public class MapAuthorizeAttribute : AuthorizeAttributeBase, IOverrideDefaultAuthLevel
@@ -36,14 +35,7 @@ namespace Connect.DNN.Modules.Map.Common
             {
                 return true;
             }
-            if (HttpContextSource.Current.Request.IsAuthenticated)
-            {
-                User = UserController.Instance.GetCurrentUserInfo();
-            }
-            else
-            {
-                User = new UserInfo();
-            }
+            User = HttpContextSource.Current.Request.IsAuthenticated ? UserController.Instance.GetCurrentUserInfo() : new UserInfo();
             ContextSecurity security = new ContextSecurity(context.ActionContext.Request.FindModuleInfo());
             switch (SecurityLevel)
             {
@@ -57,8 +49,6 @@ namespace Connect.DNN.Modules.Map.Common
                     return security.IsPointer;
                 case SecurityAccessLevel.View:
                     return security.CanView;
-                case SecurityAccessLevel.Aidan:
-                    return (User.FirstName == "Aidan");
             }
 
             return false;
