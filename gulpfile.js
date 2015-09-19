@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 
 gulp.task('browserify', function() {
     gulp.src('js/src/map.js')
-        .pipe(browserify({ }))
+        .pipe(browserify({ transform: 'reactify', ignore: 'react'  }))
         .pipe(gulp.dest('js/'));
 });
 

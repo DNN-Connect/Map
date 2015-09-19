@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/DNN-Connect/Map/issues"
   },
-  "homepage": "https://github.com/DNN-Connect/Map#readme"
+  "homepage": "https://github.com/DNN-Connect/Map#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-react": "^3.0.1",
+    "react": "^0.13.3",
+    "react-tools": "^0.13.3",
+    "reactify": "^1.1.1"
+  },
+  "dependencies": {}
 }
