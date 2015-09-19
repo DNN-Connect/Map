@@ -1,9 +1,17 @@
 /** @jsx React.DOM */
-var MapService = require('./service');
+var MapService = require('./service'),
+    ConnectMapHelpers = require('./helpers')
+    ConnectMapSettings = require('./ConnectMapSettings');
 
 var ConnectMap = React.createClass({
 
     _map: {},
+
+    onSettingsUpdate: function(newSettings) {
+        this.setState({
+            settings: newSettings
+        });
+    },
 
     getInitialState: function() {
         var mapService = new MapService(jQuery, this.props.moduleId);
@@ -21,6 +29,11 @@ var ConnectMap = React.createClass({
                 mapPoints: data.MapPoints
             });
         });
+        $('.connectMapSettings').click(function (){
+            React.render(<ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
+            ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+            return false;
+        });
     },
 
     componentDidUpdate: function() {
@@ -37,7 +50,9 @@ var ConnectMap = React.createClass({
     },
 
     render: function() {
-        return <div ref = "mapDiv" / > ;
+        return (
+          <div ref="mapDiv" />
+          );
     }
 
 });

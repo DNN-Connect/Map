@@ -1,62 +1,109 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /** @jsx React.DOM */
-var MapService = require('./service');
+var MapService = require('./service'),
+    ConnectMapHelpers = require('./helpers')
+    ConnectMapSettings = require('./ConnectMapSettings');
 
 var ConnectMap = React.createClass({displayName: "ConnectMap",
 
-  _map: {},
+    _map: {},
 
-  getInitialState: function() {
-    var mapService = new MapService(jQuery, this.props.moduleId);
-    return {
-      moduleId: this.props.moduleId,
-      service: mapService
-    }
-  },
-
-  componentDidMount: function() {
-    var that = this;
-    this.state.service.getInitialData(function (data) {
-      that.setState({
-        settings: data.Settings,
-        mapPoints: data.MapPoints
-      });
-    });
-  },
-
-  componentDidUpdate: function() {
-    // alert(this.state.settings.MapWidth);
-    // alert(this.refs.mapDiv.getDOMNode());
-    var mapDiv = $(this.refs.mapDiv.getDOMNode());
-    mapDiv.width(this.state.settings.MapWidth);
-    mapDiv.height(this.state.settings.MapHeight);
-    this._map = new google.maps.Map(mapDiv[0], {
-              center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
-              zoom: this.state.settings.Zoom,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
+    onSettingsUpdate: function(newSettings) {
+        this.setState({
+            settings: newSettings
         });
-  },
+    },
 
-  render: function() {
-    if (this.state.settings === undefined) {
-      this._div = React.createElement("div", null);
-    } else {
-      this._div = React.createElement("div", null);
+    getInitialState: function() {
+        var mapService = new MapService(jQuery, this.props.moduleId);
+        return {
+            moduleId: this.props.moduleId,
+            service: mapService
+        }
+    },
+
+    componentDidMount: function() {
+        var that = this;
+        this.state.service.getInitialData(function(data) {
+            that.setState({
+                settings: data.Settings,
+                mapPoints: data.MapPoints
+            });
+        });
+        $('.connectMapSettings').click(function (){
+            React.render(React.createElement(ConnectMapSettings, {Settings: that.state.settings, onUpdate: that.onSettingsUpdate}), $('#connectMapPanel')[0]);
+            ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+            return false;
+        });
+    },
+
+    componentDidUpdate: function() {
+        if (this.state.settings !== undefined) {
+            var mapDiv = $(this.refs.mapDiv.getDOMNode());
+            mapDiv.width(this.state.settings.MapWidth);
+            mapDiv.height(this.state.settings.MapHeight);
+            this._map = new google.maps.Map(mapDiv[0], {
+                center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
+                zoom: this.state.settings.Zoom,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+        }
+    },
+
+    render: function() {
+        return (
+          React.createElement("div", {ref: "mapDiv"})
+          );
     }
-    return React.createElement("div", {ref: "mapDiv"});
-  }
 
 });
 
 module.exports = ConnectMap;
 
 
-},{"./service":3}],2:[function(require,module,exports){
+},{"./ConnectMapSettings":2,"./helpers":4,"./service":5}],2:[function(require,module,exports){
 /** @jsx React.DOM */
-var ConnectMap = require('./ConnectMap');
+var MapService = require('./service'),
+    ConnectMapHelpers = require('./helpers');
+
+var ConnectMapSettings = React.createClass({displayName: "ConnectMapSettings",
+
+  handleUpdate: function() {
+    var newSettings = this.props.Settings;
+    newSettings.MapWidth = this.refs.txtMapWidth.getDOMNode().value;
+    this.props.onUpdate(newSettings);
+    ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+  },
+
+  componentDidMount: function() {
+    this.refs.txtMapWidth.getDOMNode().value = this.props.Settings.MapWidth;
+  },
+
+    render: function() {
+        return (
+          React.createElement("div", null, 
+           React.createElement("input", {ref: "txtMapWidth", type: "text"}), 
+           React.createElement("button", {className: "dnnPrimaryAction", onClick: this.handleUpdate}, "Update")
+          )
+          );
+    }
+
+});
+
+module.exports = ConnectMapSettings;
+
+
+},{"./helpers":4,"./service":5}],3:[function(require,module,exports){
+/** @jsx React.DOM */
+var ConnectMap = require('./ConnectMap'),
+    ConnectMapHelpers = require('./helpers')
+    ConnectMapSettings = require('./ConnectMapSettings');
 
 (function($) {
     $(document).ready(function() {
+        if($('#connectMapPanel').length == 0) {
+            $('body').append('<div id="connectMapPanel" class="connectMapPanel"></div>');
+        };
         $('.connectMap').each(function(i, el) {
             var moduleId = $(el).data('moduleid');
             React.render(React.createElement(ConnectMap, {moduleId: moduleId}), el);
@@ -65,7 +112,42 @@ var ConnectMap = require('./ConnectMap');
 }(jQuery));
 
 
-},{"./ConnectMap":1}],3:[function(require,module,exports){
+},{"./ConnectMap":1,"./ConnectMapSettings":2,"./helpers":4}],4:[function(require,module,exports){
+var ConnectMapHelpers = (function($) {
+    return {
+        slidePanel: function(panel) {
+            if (panel.css('display') == 'block') {
+                $('body').off("click");
+                panel.off("click");
+                panel.animate({
+                    right: -window.innerWidth
+                }, 800, function() {
+                    panel.css('display', 'none');
+                    $('body').css('overflow', 'auto');
+                });
+            } else {
+                $('body').css('overflow', 'hidden');
+                panel.css('right', -window.innerWidth);
+                panel.css('display', 'block');
+                panel.animate({
+                    right: 0
+                }, 800);
+                var that = this;
+                $('body').on("click", function(e) {
+                    that.slidePanel(panel);
+                });
+                panel.on("click", function(e) {
+                    e.stopPropagation();
+                })
+            }
+        }
+    }
+})(jQuery);
+
+module.exports = ConnectMapHelpers;
+
+
+},{}],5:[function(require,module,exports){
 var ConnectMapService = function ($, mid) {
     var moduleId = mid;
     var baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/Map');
@@ -119,4 +201,4 @@ var ConnectMapService = function ($, mid) {
 module.exports = ConnectMapService;
 
 
-},{}]},{},[2])
+},{}]},{},[3])
