@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var MapService = require('./service'),
-    ConnectMapHelpers = require('./helpers');
+    ConnectMapHelpers = require('./helpers'),
+    Input = require('./forms/input');
 
 var ConnectMapSettings = React.createClass({
 
@@ -18,7 +19,12 @@ var ConnectMapSettings = React.createClass({
     render: function() {
         return (
           <div>
-           <input ref="txtMapWidth" type="text" />
+            <Input 
+              text="Map Width"
+              ref="txtMapWidth"
+              value={this.props.Settings.MapWidth}
+              regex="(\d+)(px|%)"
+              groupClass="inputClass" />
            <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
           </div>
           );
