@@ -37,6 +37,14 @@ var Input = React.createClass({
     });
   },
 
+  getValue: function() {
+    if (this.regexPassed(this.state.value) && this.requiredPassed(this.state.value)) {
+      return this.state.value;
+    } else {
+      return null;
+    }
+  },
+
   render: function() {
     return (
       <div className={this.props.groupClass}>

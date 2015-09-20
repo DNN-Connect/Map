@@ -7,7 +7,7 @@ var ConnectMapSettings = React.createClass({
 
   handleUpdate: function() {
     var newSettings = this.props.Settings;
-    newSettings.MapWidth = this.refs.txtMapWidth.getDOMNode().value;
+    newSettings.MapWidth = this.refs.txtMapWidth.getValue() || newSettings.MapWidth;
     this.props.onUpdate(newSettings);
     ConnectMapHelpers.slidePanel($('#connectMapPanel'));
   },
