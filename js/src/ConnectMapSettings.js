@@ -24,7 +24,7 @@ var ConnectMapSettings = React.createClass({
               ref="txtMapWidth"
               value={this.props.Settings.MapWidth}
               regex="(\d+)(px|%)"
-              groupClass="inputClass" />
+              groupClass="conInput" />
            <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
           </div>
           );

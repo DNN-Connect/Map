@@ -48,7 +48,6 @@ var Input = React.createClass({
          ref="txtInput"
          value={this.state.value}
          onChange={this.handleChange} />
-         <span>{this.state.message}</span>
       </div>
       );
   }
