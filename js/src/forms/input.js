@@ -55,7 +55,7 @@ var Input = React.createClass({
     if (this.state.iconState == 'circle_tick') {
       svg.setAttribute('title', 'OK');
     } else {
-      svg.setAttribute('title', 'Not good');
+      svg.setAttribute('title', this.props.errorMessage);
     }
   },
 
