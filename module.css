@@ -12,6 +12,10 @@ div.connectMapPanel {
     padding: 15px;
 }
 
+.conInput {
+    width: 100%;
+}
+
 .conInput label {
     display: block;
     font-weight: bold;
@@ -20,6 +24,7 @@ div.connectMapPanel {
 
 .conInput input[type="text"] {
     display: block;
+    width: calc(100% - 30px);
     background: #ffffff none repeat scroll 0 0;
     border: 1px solid #c9c9c9;
     border-radius: 3px;
@@ -28,4 +33,28 @@ div.connectMapPanel {
     font-size: 12px;
     margin-bottom: 18px;
     padding: 8px;
+}
+
+.conIcon {
+    position: relative;
+    top: -44px;
+    right: -10px;
+    text-align: right;
+}
+.conIcon svg {
+    width: 22px;
+    height: 22px;
+}
+.conInput svg {
+    position: relative;
+    top: -44px;
+    left: calc(100% - 40px);
+    width: 22px;
+    height: 22px;
+}
+.circle_error path {
+    fill: red;
+}
+.circle_tick path {
+    fill: green;
 }

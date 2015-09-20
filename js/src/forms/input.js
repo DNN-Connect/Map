@@ -1,10 +1,12 @@
 /** @jsx React.DOM */
+var Icon = require('./icons');
+
 var Input = React.createClass({
 
   getInitialState: function() {
     return {
       value: this.props.value,
-      message: this.props.regex
+      iconState: this.getIconState(this.props.value)
     }
   },
 
@@ -26,28 +28,44 @@ var Input = React.createClass({
   },
 
   handleChange: function(e) {
-    var input = e.target.value;
-    if (this.regexPassed(input) && this.requiredPassed(input)) {
-      $(this.refs.txtInput.getDOMNode()).css('background-color', 'white');
-    } else {
-      $(this.refs.txtInput.getDOMNode()).css('background-color', 'red');
-    }
     this.setState({
-      value: e.target.value
+      value: e.target.value,
+      iconState: this.getIconState(e.target.value)
     });
   },
 
   getValue: function() {
-    if (this.regexPassed(this.state.value) && this.requiredPassed(this.state.value)) {
+    if (this.state.iconState == 'circle_tick') {
       return this.state.value;
     } else {
       return null;
     }
   },
 
+  getIconState: function(input) {
+    if (this.regexPassed(input) && this.requiredPassed(input)) {
+      return 'circle_tick';
+    } else {
+      return 'circle_error';
+    }
+  },
+
+  setIconTitle: function() {
+    var svg = $(this.refs.mainDiv.getDOMNode()).children('svg')[0];
+    if (this.state.iconState == 'circle_tick') {
+      svg.setAttribute('title', 'OK');
+    } else {
+      svg.setAttribute('title', 'Not good');
+    }
+  },
+
+  componentDidMount: function() {
+    this.setIconTitle();
+  },
+
   render: function() {
     return (
-      <div className={this.props.groupClass}>
+      <div className={this.props.groupClass} ref="mainDiv">
        <label htmlFor={this.props.text}>
         <span>{this.props.text}</span>
        </label>
@@ -56,8 +74,13 @@ var Input = React.createClass({
          ref="txtInput"
          value={this.state.value}
          onChange={this.handleChange} />
+       <Icon type={this.state.iconState} />
       </div>
       );
+  },
+
+  componentDidUpdate: function() {
+    this.setIconTitle();
   }
 
 });
