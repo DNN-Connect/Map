@@ -22,7 +22,7 @@ div.connectMapPanel {
     padding: 5px 0;
 }
 
-.conInput input[type="text"] {
+.conInput input[type="text"], .conInput textarea {
     display: block;
     width: calc(100% - 30px);
     background: #ffffff none repeat scroll 0 0;

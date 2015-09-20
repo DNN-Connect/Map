@@ -13,14 +13,15 @@ var ConnectMapHelpers = (function($) {
         $('body').css('overflow', 'hidden');
         panel.css('right', -window.innerWidth);
         panel.css('display', 'block');
+        var that = this;
         panel.animate({
           right: 0
-        }, 800);
-        var that = this;
-        $('body').on("click", function(e) {
-          if ($(e.target).closest('#' + panel[0].id).length == 0) {
-            that.slidePanel(panel);
-          }
+        }, 800, function() {          
+          $('body').on("click", function(e) {
+            if ($(e.target).closest('#' + panel[0].id).length == 0) {
+              that.slidePanel(panel);
+            }
+          });
         });
       }
     }

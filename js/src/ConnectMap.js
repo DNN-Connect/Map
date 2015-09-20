@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 var MapService = require('./service'),
-  ConnectMapHelpers = require('./helpers')
-ConnectMapSettings = require('./ConnectMapSettings');
+  ConnectMapHelpers = require('./helpers'),
+  ConnectMapSettings = require('./ConnectMapSettings'),
+  EditMapPoint = require('./EditMapPoint');
 
 var ConnectMap = React.createClass({
 
@@ -32,8 +33,51 @@ var ConnectMap = React.createClass({
     return {
       moduleId: this.props.moduleId,
       service: mapService,
-      security: {}
+      security: {},
+      isAdding: false
     }
+  },
+
+  addPoint: function() {
+    this._map.setOptions({
+      draggableCursor: 'crosshair'
+    });
+    this.setState({
+      isAdding: true
+    });
+    var that = this;
+    google.maps.event.addListener(this._map, 'click', function(e) {
+      var newPoint = {
+        Latitude: e.latLng.lat(),
+        Longitude: e.latLng.lng(),
+        Message: ''
+      };
+      React.render(
+        <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} />, $('#connectMapPanel')[0]);
+      ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+    });
+    return false;
+  },
+
+  onAddPoint: function(newMapPoint) {
+    var that = this;
+    this.state.service.addPoint(newMapPoint, function(data) {
+      that.addPointToMap(data);
+    });
+  },
+
+  addPointToMap: function(point) {
+    var infowindow = new google.maps.InfoWindow({
+      content: point.Message
+    });
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(point.Latitude, point.Longitude),
+      map: this._map
+    });
+    var that = this;
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(that._map, marker);
+    });
   },
 
   componentDidMount: function() {
@@ -47,6 +91,10 @@ var ConnectMap = React.createClass({
     });
   },
 
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextState.settings !== this.state.settings;
+  },
+
   componentDidUpdate: function() {
     if (this.state.settings !== undefined) {
       var mapDiv = $(this.refs.mapDiv.getDOMNode());
@@ -58,6 +106,9 @@ var ConnectMap = React.createClass({
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       var that = this;
+      $.each(this.state.mapPoints, function(index, item) {
+        that.addPointToMap(item);
+      });
       $('.connectMapSettings').click(function() {
         React.render(
           <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
@@ -73,8 +124,9 @@ var ConnectMap = React.createClass({
     if (this.state.security.CanEdit) {
       editPanel = (
         <div>
-        <a href="#" className="dnnPrimaryAction connectMapSettings">Show Settings</a>
-        <a href="#" className="dnnSecondaryAction connectSetMap" onClick={this.setMap}>Set Map</a>
+          <a href="#" className="dnnPrimaryAction connectMapSettings">Show Settings</a>
+          <a href="#" className="dnnSecondaryAction" onClick={this.setMap}>Set Map</a>
+          <a href="#" className="dnnSecondaryAction" onClick={this.addPoint}>Add Point</a>
         </div>
       );
     }

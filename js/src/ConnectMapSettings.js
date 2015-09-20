@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var ConnectMapHelpers = require('./helpers'),
-    Input = require('./forms/input');
+  TextBox = require('./forms/textbox');
 
 var ConnectMapSettings = React.createClass({
 
@@ -17,27 +17,27 @@ var ConnectMapSettings = React.createClass({
     this.refs.txtMapHeight.getDOMNode().value = this.props.Settings.MapHeight;
   },
 
-    render: function() {
-        return (
-          <div>
-            <Input 
-              text="Map Width"
-              ref="txtMapWidth"
-              value={this.props.Settings.MapWidth}
-              regex="(\d+)(px|%)"
-              errorMessage="Should be a valid css width (in px or %)"
-              groupClass="conInput" />
-            <Input 
-              text="Map Height"
-              ref="txtMapHeight"
-              value={this.props.Settings.MapHeight}
-              regex="(\d+)(px|%)"
-              errorMessage="Should be a valid css width (in px or %)"
-              groupClass="conInput" />
-           <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
-          </div>
-          );
-    }
+  render: function() {
+    return (
+      <div>
+        <TextBox 
+          text="Map Width"
+          ref="txtMapWidth"
+          value={this.props.Settings.MapWidth}
+          regex="(\d+)(px|%)"
+          errorMessage="Should be a valid css width (in px or %)"
+          groupClass="conInput" />
+        <TextBox 
+          text="Map Height"
+          ref="txtMapHeight"
+          value={this.props.Settings.MapHeight}
+          regex="(\d+)(px|%)"
+          errorMessage="Should be a valid css width (in px or %)"
+          groupClass="conInput" />
+       <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
+      </div>
+    );
+  }
 
 });
 

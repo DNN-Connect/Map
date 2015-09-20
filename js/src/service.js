@@ -30,15 +30,12 @@ var ConnectMapService = function ($, mid) {
         this.ajaxCall('POST', 'Settings', 'Update', null, newSettings, success);
     }
 
+    this.addPoint = function(newMapPoint, success) {
+        this.ajaxCall('POST', 'MapPoints', 'Add', null, newMapPoint, success);
+    }
+
     this.getDataPoints = function(success) {
         this.ajaxCall('GET', 'MapPoints', 'List', null, null, success);
-    }
-    this.addPoint = function(lat, lng, msg, success) {
-        this.ajaxCall('POST', 'MapPoints', 'Add', null, {
-            Latitude: lat,
-            Longitude: lng,
-            Message: msg
-        }, success);
     }
     this.showUser = function(userId, success, fail) {
         this.ajaxCall('GET', 'MapPoints', 'GetUser', userId, null, success, fail);
