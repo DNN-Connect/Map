@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 using Connect.DNN.Modules.Map.Common;
 using Connect.DNN.Modules.Map.Models.MapPoints;
-using DotNetNuke.Entities.Users;
-using DotNetNuke.Web.Api;
 
 namespace Connect.DNN.Modules.Map.Controllers
 {
@@ -19,6 +15,7 @@ namespace Connect.DNN.Modules.Map.Controllers
         {
             public ModuleSettings Settings { get; set; }
             public IEnumerable<MapPoint> MapPoints { get; set; }
+            public ContextSecurity Security { get; set; }
         }
 
         #region Service Methods
@@ -29,9 +26,9 @@ namespace Connect.DNN.Modules.Map.Controllers
             InitData init = new InitData();
             init.Settings = ModuleSettings.GetSettings(ActiveModule);
             init.MapPoints = MapPointsController.GetMapPoints(ActiveModule.ModuleID);
+            init.Security = new ContextSecurity(ActiveModule);
             return Request.CreateResponse(HttpStatusCode.OK, init);
         }
-
         #endregion
 
     }

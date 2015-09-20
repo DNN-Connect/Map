@@ -114,7 +114,6 @@
     <Compile Include="Repositories\MapPointRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="js\Connect.Map.js" />
     <Content Include="module.css" />
   </ItemGroup>
   <ItemGroup>
