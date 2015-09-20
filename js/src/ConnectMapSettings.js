@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
-var MapService = require('./service'),
-    ConnectMapHelpers = require('./helpers'),
+var ConnectMapHelpers = require('./helpers'),
     Input = require('./forms/input');
 
 var ConnectMapSettings = React.createClass({
@@ -8,12 +7,14 @@ var ConnectMapSettings = React.createClass({
   handleUpdate: function() {
     var newSettings = this.props.Settings;
     newSettings.MapWidth = this.refs.txtMapWidth.getValue() || newSettings.MapWidth;
+    newSettings.MapHeight = this.refs.txtMapHeight.getValue() || newSettings.MapHeight;
     this.props.onUpdate(newSettings);
     ConnectMapHelpers.slidePanel($('#connectMapPanel'));
   },
 
   componentDidMount: function() {
     this.refs.txtMapWidth.getDOMNode().value = this.props.Settings.MapWidth;
+    this.refs.txtMapHeight.getDOMNode().value = this.props.Settings.MapHeight;
   },
 
     render: function() {
@@ -23,6 +24,13 @@ var ConnectMapSettings = React.createClass({
               text="Map Width"
               ref="txtMapWidth"
               value={this.props.Settings.MapWidth}
+              regex="(\d+)(px|%)"
+              errorMessage="Should be a valid css width (in px or %)"
+              groupClass="conInput" />
+            <Input 
+              text="Map Height"
+              ref="txtMapHeight"
+              value={this.props.Settings.MapHeight}
               regex="(\d+)(px|%)"
               errorMessage="Should be a valid css width (in px or %)"
               groupClass="conInput" />

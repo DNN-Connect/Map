@@ -26,6 +26,10 @@ var ConnectMapService = function ($, mid) {
         this.ajaxCall('GET', 'Module', 'InitialData', null, null, success);
     }
 
+    this.updateSettings = function(newSettings, success) {
+        this.ajaxCall('POST', 'Settings', 'Update', null, newSettings, success);
+    }
+
     this.getDataPoints = function(success) {
         this.ajaxCall('GET', 'MapPoints', 'List', null, null, success);
     }

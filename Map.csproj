@@ -103,6 +103,7 @@
     <Compile Include="Common\StringBasedSettings.cs" />
     <Compile Include="Common\TabModuleScopedSettings.cs" />
     <Compile Include="Controllers\MapPointsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\MapPointsController_Services.cs" />
     <Compile Include="Data\RepositoryImpl.cs" />

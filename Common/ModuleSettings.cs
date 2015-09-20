@@ -10,8 +10,6 @@ namespace Connect.DNN.Modules.Map.Common
 
         #region Properties
         internal ISettingsStore Store;
-
-        public string View { get { return Store.Get("Home"); } set { Store.Set(value); } }
         public double MapOriginLat { get { return Store.Get(44.1); } set { Store.Set(value); } }
         public double MapOriginLong { get { return Store.Get(3.07); } set { Store.Set(value); } }
         public int Zoom { get { return Store.Get(8); } set { Store.Set(value); } }

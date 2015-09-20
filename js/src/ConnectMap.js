@@ -8,8 +8,11 @@ var ConnectMap = React.createClass({
     _map: {},
 
     onSettingsUpdate: function(newSettings) {
-        this.setState({
-            settings: newSettings
+        var that = this;
+        this.state.service.updateSettings(newSettings, function(data) {
+          that.setState({
+            settings: data
+          });
         });
     },
 
