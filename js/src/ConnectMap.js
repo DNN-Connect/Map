@@ -16,6 +16,17 @@ var ConnectMap = React.createClass({
     });
   },
 
+  setMap: function() {
+    if (confirm('You wish to set the map to this location and zoom?')) {
+      var newSettings = this.state.settings;
+      newSettings.MapOriginLat = this._map.getCenter().lat();
+      newSettings.MapOriginLong = this._map.getCenter().lng();
+      newSettings.Zoom = this._map.getZoom();
+      this.state.service.updateSettings(newSettings);
+    }
+    return false;
+  },
+
   getInitialState: function() {
     var mapService = new MapService(jQuery, this.props.moduleId);
     return {
@@ -61,7 +72,10 @@ var ConnectMap = React.createClass({
     var editPanel = (<span />);
     if (this.state.security.CanEdit) {
       editPanel = (
+        <div>
         <a href="#" className="dnnPrimaryAction connectMapSettings">Show Settings</a>
+        <a href="#" className="dnnSecondaryAction connectSetMap" onClick={this.setMap}>Set Map</a>
+        </div>
       );
     }
 
