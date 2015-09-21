@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 var MapService = require('./service'),
-  ConnectMapHelpers = require('./helpers'),
-  ConnectMapSettings = require('./ConnectMapSettings'),
-  EditMapPoint = require('./EditMapPoint');
+    ConnectMapHelpers = require('./helpers'),
+    ConnectMapSettings = require('./ConnectMapSettings'),
+    EditMapPoint = require('./EditMapPoint'),
+    Icon = require('./forms/icons');
 
 var ConnectMap = React.createClass({
 
@@ -124,9 +125,15 @@ var ConnectMap = React.createClass({
     if (this.state.security.CanEdit) {
       editPanel = (
         <div>
-          <a href="#" className="dnnPrimaryAction connectMapSettings">Show Settings</a>
-          <a href="#" className="dnnSecondaryAction" onClick={this.setMap}>Set Map</a>
-          <a href="#" className="dnnSecondaryAction" onClick={this.addPoint}>Add Point</a>
+          <a href="#" className="conLink connectMapSettings" title="Show Settings">
+           <Icon type="map" />
+          </a>
+          <a href="#" className="conLink" onClick={this.setMap} title="Set Map">
+           <Icon type="crosshairs" />
+          </a>
+          <a href="#" className="conLink" onClick={this.addPoint} title="Add Point">
+           <Icon type="map-marker" />
+          </a>
         </div>
       );
     }

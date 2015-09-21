@@ -52,9 +52,13 @@ div.connectMapPanel {
     width: 22px;
     height: 22px;
 }
-.circle_error path {
+.conLink svg {
+    width: 24px;
+    height: 24px;
+}
+.exclamation-circle path {
     fill: red;
 }
-.circle_tick path {
+.check-circle path {
     fill: green;
 }

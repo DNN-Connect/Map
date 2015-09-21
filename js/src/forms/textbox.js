@@ -35,7 +35,7 @@ var Input = React.createClass({
   },
 
   getValue: function() {
-    if (this.state.iconState == 'circle_tick') {
+    if (this.state.iconState == 'check-circle') {
       return this.state.value;
     } else {
       return null;
@@ -44,15 +44,15 @@ var Input = React.createClass({
 
   getIconState: function(input) {
     if (this.regexPassed(input) && this.requiredPassed(input)) {
-      return 'circle_tick';
+      return 'check-circle';
     } else {
-      return 'circle_error';
+      return 'exclamation-circle';
     }
   },
 
   setIconTitle: function() {
     var svg = $(this.refs.mainDiv.getDOMNode()).children('svg')[0];
-    if (this.state.iconState == 'circle_tick') {
+    if (this.state.iconState == 'check-circle') {
       svg.setAttribute('title', 'OK');
     } else {
       svg.setAttribute('title', this.props.errorMessage);
