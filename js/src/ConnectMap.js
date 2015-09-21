@@ -8,6 +8,7 @@ var MapService = require('./service'),
 var ConnectMap = React.createClass({
 
   _map: {},
+  _mapListener: {},
 
   onSettingsUpdate: function(newSettings) {
     var that = this;
@@ -40,6 +41,9 @@ var ConnectMap = React.createClass({
   },
 
   addPoint: function() {
+    if (this.state.isAdding) {
+      return this.stopAddingPoint();
+    }
     this._map.setOptions({
       draggableCursor: 'crosshair'
     });
@@ -47,7 +51,7 @@ var ConnectMap = React.createClass({
       isAdding: true
     });
     var that = this;
-    google.maps.event.addListener(this._map, 'click', function(e) {
+    this._mapListener = google.maps.event.addListener(this._map, 'click', function(e) {
       var newPoint = {
         Latitude: e.latLng.lat(),
         Longitude: e.latLng.lng(),
@@ -56,7 +60,20 @@ var ConnectMap = React.createClass({
       React.render(
         <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} />, $('#connectMapPanel')[0]);
       ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+      that.stopAddingPoint();
     });
+    return false;
+  },
+
+  stopAddingPoint: function() {
+    this._map.setOptions({
+      draggableCursor: 'grab'
+    });
+    this.setState({
+      isAdding: false
+    });
+    var that = this;
+    google.maps.event.removeListener(this._mapListener);
     return false;
   },
 
