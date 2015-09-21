@@ -81,6 +81,11 @@ var ConnectMap = React.createClass({
     var that = this;
     this.state.service.addPoint(newMapPoint, function(data) {
       that.addPointToMap(data);
+      var newPoints = that.state.mapPoints;
+      newPoints.push(data);
+      that.setState({
+        mapPoints: newPoints
+      });
     });
   },
 
