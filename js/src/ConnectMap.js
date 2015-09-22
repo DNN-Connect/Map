@@ -158,6 +158,7 @@ var ConnectMap = React.createClass({
       $.each(this.state.mapPoints, function(index, item) {
         that.addPointToMap(item);
       });
+      $('.connectMapSettings').off("click");
       $('.connectMapSettings').click(function() {
         React.render(
           <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
