@@ -17,6 +17,7 @@ namespace Connect.DNN.Modules.Map.Controllers
             public string MapWidth { get; set; }
             public string MapHeight { get; set; }
             public bool AllowOtherEdit { get; set; }
+            public string GoogleMapApiKey { get; set; }
         }
 
 
@@ -33,6 +34,10 @@ namespace Connect.DNN.Modules.Map.Controllers
             oldSettings.MapWidth = newSettings.MapWidth;
             oldSettings.Zoom = newSettings.Zoom;
             oldSettings.AllowOtherEdit = newSettings.AllowOtherEdit;
+            if (Security.IsAdmin)
+            {
+                oldSettings.GoogleMapApiKey = newSettings.GoogleMapApiKey;
+            }
             oldSettings.SaveSettings();
             return Request.CreateResponse(HttpStatusCode.OK, oldSettings);
         }
