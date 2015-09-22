@@ -7,11 +7,18 @@ var EditMapPoint = React.createClass({
   handleUpdate: function() {
     var newMapPoint = this.props.MapPoint;
     newMapPoint.Message = this.refs.txtMessage.getValue();
-    this.props.onUpdate(newMapPoint);
+    this.props.onUpdate(newMapPoint, this.props.Marker);
     ConnectMapHelpers.slidePanel($('#connectMapPanel'));
   },
 
   render: function() {
+
+    var buttonText = "Update Point";
+    if (this.props.MapPoint.MapPointId === undefined)
+    {
+      buttonText = "Add Point";
+    }
+
     return (
       <div>
         <div>Latitude: {this.props.MapPoint.Latitude}</div>
@@ -21,7 +28,7 @@ var EditMapPoint = React.createClass({
           ref="txtMessage"
           value={this.props.MapPoint.Message}
           groupClass="conInput" />
-       <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Add Point</button>
+       <button className="dnnPrimaryAction" onClick={this.handleUpdate}>{buttonText}</button>
       </div>
      );
   }

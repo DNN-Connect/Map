@@ -42,11 +42,11 @@ namespace Connect.DNN.Modules.Map.Common
                 case SecurityAccessLevel.Host:
                     return User.IsSuperUser;
                 case SecurityAccessLevel.Admin:
-                    return security.IsAdmin;
+                    return security.IsAdmin | User.IsSuperUser;
                 case SecurityAccessLevel.Edit:
-                    return security.CanEdit;
+                    return security.CanEdit | security.IsAdmin | User.IsSuperUser;
                 case SecurityAccessLevel.Pointer:
-                    return security.IsPointer;
+                    return security.IsPointer | security.CanEdit | security.IsAdmin | User.IsSuperUser;
                 case SecurityAccessLevel.View:
                     return security.CanView;
             }

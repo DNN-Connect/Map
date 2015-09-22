@@ -15,6 +15,7 @@ namespace Connect.DNN.Modules.Map.Common
         public int Zoom { get { return Store.Get(8); } set { Store.Set(value); } }
         public string MapWidth { get { return Store.Get("100%"); } set { Store.Set(value); } }
         public string MapHeight { get { return Store.Get("500px"); } set { Store.Set(value); } }
+        public bool AllowOtherEdit { get { return Store.Get(false); } set { Store.Set(value); } }
         public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
         #endregion
 

@@ -11,5 +11,12 @@ namespace Connect.DNN.Modules.Map.Common
             set { _settings = value; }
         }
 
+        private ContextSecurity _security;
+        public ContextSecurity Security
+        {
+            get { return _security ?? (_security = new ContextSecurity(ActiveModule)); }
+            set { _security = value; }
+        }
+
     }
 }

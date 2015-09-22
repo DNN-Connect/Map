@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 var MapService = require('./service'),
-    ConnectMapHelpers = require('./helpers'),
-    ConnectMapSettings = require('./ConnectMapSettings'),
-    EditMapPoint = require('./EditMapPoint'),
-    Icon = require('./forms/icons');
+  ConnectMapHelpers = require('./helpers'),
+  ConnectMapSettings = require('./ConnectMapSettings'),
+  EditMapPoint = require('./EditMapPoint'),
+  Icon = require('./forms/icons'),
+  MapPointMessage = require('./MapPointMessage');
 
 var ConnectMap = React.createClass({
 
@@ -77,29 +78,54 @@ var ConnectMap = React.createClass({
     return false;
   },
 
-  onAddPoint: function(newMapPoint) {
+  onAddPoint: function(newMapPoint, marker) {
     var that = this;
-    this.state.service.addPoint(newMapPoint, function(data) {
-      that.addPointToMap(data);
-      var newPoints = that.state.mapPoints;
-      newPoints.push(data);
-      that.setState({
-        mapPoints: newPoints
-      });
+    this.state.service.submitPoint(newMapPoint, function(data) {
+      if (marker === undefined) {
+        that.addPointToMap(data);
+        var newPoints = that.state.mapPoints;
+        newPoints.push(data);
+        that.setState({
+          mapPoints: newPoints
+        });
+      } else {
+        var newPoints = that.state.mapPoints;
+        for (var i = 0; i < newPoints.length; i++) {
+          if (newPoints[i].MapPointId === newMapPoint.MapPointId) {
+            newPoints[i] = newMapPoint;
+          }
+        }
+        that.setState({
+          mapPoints: newPoints
+        });
+      }
     });
   },
 
   addPointToMap: function(point) {
-    var infowindow = new google.maps.InfoWindow({
-      content: point.Message
-    });
+    var canEdit = (this.state.security.IsPointer || this.state.security.CanEdit);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(point.Latitude, point.Longitude),
-      map: this._map
+      map: this._map,
+      draggable: canEdit,
+      mapPoint: point
     });
+    var msg = $('<div id="point' + point.MapPointId + '" class="conPointMessage"></div>').appendTo('body');
+    React.render(
+      <MapPointMessage MapPoint={point} Security={this.state.security} OnEdit={this.onAddPoint} Marker={marker} />,
+      msg[0]);
+    var infowindow = new google.maps.InfoWindow();
+    infowindow.setContent(msg[0]);
+    msg.remove();
     var that = this;
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'click', function(e) {
       infowindow.open(that._map, marker);
+    });
+    google.maps.event.addListener(marker, 'dragend', function(e) {
+      var changedPoint = marker.mapPoint;
+      changedPoint.Latitude = e.latLng.lat();
+      changedPoint.Longitude = e.latLng.lng();
+      that.onAddPoint(changedPoint, marker);
     });
   },
 

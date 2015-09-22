@@ -7,6 +7,12 @@ var Input = React.createClass({
     }
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: nextProps.value
+    });
+  },
+
   handleChange: function(e) {
     this.setState({
       value: e.target.value
@@ -14,7 +20,7 @@ var Input = React.createClass({
   },
 
   getValue: function() {
-    return this.state.value;
+    return this.refs.txtInput.getDOMNode().value;
   },
 
   render: function() {

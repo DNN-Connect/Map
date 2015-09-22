@@ -22,6 +22,10 @@ namespace Connect.DNN.Modules.Map.Models.MapPoints
         public MapPointBase GetMapPointBase()
         {
             MapPointBase res = new MapPointBase();
+            res.CreatedByUserID = CreatedByUserID;
+            res.CreatedOnDate = CreatedOnDate;
+            res.LastModifiedByUserID = LastModifiedByUserID;
+            res.LastModifiedOnDate = LastModifiedOnDate;
             res.MapPointId = MapPointId;
             res.ModuleId = ModuleId;
             res.Latitude = Latitude;

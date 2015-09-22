@@ -22,10 +22,28 @@ namespace Connect.DNN.Modules.Map.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
-        public HttpResponseMessage Add(MapPointBase postData)
+        public HttpResponseMessage MapPoint(MapPointBase postData)
         {
             postData.ModuleId = ActiveModule.ModuleID;
-            AddMapPoint(ref postData, UserInfo.UserID);
+            if (postData.MapPointId == -1)
+            {
+                AddMapPoint(ref postData, UserInfo.UserID);
+            }
+            else
+            {
+                var oldData = GetMapPoint(postData.MapPointId).GetMapPointBase();
+                if (oldData.CreatedByUserID == UserInfo.UserID | Settings.AllowOtherEdit | Security.CanEdit | Security.IsAdmin)
+                {
+                    oldData.Latitude = postData.Latitude;
+                    oldData.Longitude = postData.Longitude;
+                    oldData.Message = postData.Message;
+                    UpdateMapPoint(oldData, UserInfo.UserID);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.MethodNotAllowed, "");                   
+                }
+            }
             return Request.CreateResponse(HttpStatusCode.OK, postData);
         }
 

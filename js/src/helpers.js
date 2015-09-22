@@ -1,5 +1,6 @@
 var ConnectMapHelpers = (function($) {
   return {
+    
     slidePanel: function(panel) {
       if (panel.css('display') == 'block') {
         $('body').off("click");
@@ -16,7 +17,7 @@ var ConnectMapHelpers = (function($) {
         var that = this;
         panel.animate({
           right: 0
-        }, 800, function() {          
+        }, 800, function() {
           $('body').on("click", function(e) {
             if ($(e.target).closest('#' + panel[0].id).length == 0) {
               that.slidePanel(panel);
@@ -24,7 +25,15 @@ var ConnectMapHelpers = (function($) {
           });
         });
       }
+    },
+
+    formatString: function(format) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      return format.replace(/{(\d+)}/g, function(match, number) {
+        return typeof args[number] != 'undefined' ? args[number] : match;
+      });
     }
+
   }
 })(jQuery);
 

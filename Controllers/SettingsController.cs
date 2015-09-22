@@ -16,6 +16,7 @@ namespace Connect.DNN.Modules.Map.Controllers
             public int Zoom { get; set; }
             public string MapWidth { get; set; }
             public string MapHeight { get; set; }
+            public bool AllowOtherEdit { get; set; }
         }
 
 
@@ -31,6 +32,7 @@ namespace Connect.DNN.Modules.Map.Controllers
             oldSettings.MapOriginLong = newSettings.MapOriginLong;
             oldSettings.MapWidth = newSettings.MapWidth;
             oldSettings.Zoom = newSettings.Zoom;
+            oldSettings.AllowOtherEdit = newSettings.AllowOtherEdit;
             oldSettings.SaveSettings();
             return Request.CreateResponse(HttpStatusCode.OK, oldSettings);
         }

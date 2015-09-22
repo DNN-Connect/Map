@@ -30,8 +30,8 @@ var ConnectMapService = function ($, mid) {
         this.ajaxCall('POST', 'Settings', 'Update', null, newSettings, success);
     }
 
-    this.addPoint = function(newMapPoint, success) {
-        this.ajaxCall('POST', 'MapPoints', 'Add', null, newMapPoint, success);
+    this.submitPoint = function(newMapPoint, success) {
+        this.ajaxCall('POST', 'MapPoints', 'MapPoint', null, newMapPoint, success);
     }
 
     this.getDataPoints = function(success) {
