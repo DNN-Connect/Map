@@ -9,6 +9,7 @@ var ConnectMapSettings = React.createClass({
     newSettings.MapWidth = this.refs.txtMapWidth.getValue() || newSettings.MapWidth;
     newSettings.MapHeight = this.refs.txtMapHeight.getValue() || newSettings.MapHeight;
     newSettings.AllowOtherEdit = this.refs.chkAllowOtherEdit.getValue() || newSettings.AllowOtherEdit;
+    newSettings.GoogleMapApiKey = this.refs.txtGoogleKey.getValue();
     this.props.onUpdate(newSettings);
     window.ConnectMap.slidePanel($('#connectMapPanel'));
   },
@@ -17,6 +18,7 @@ var ConnectMapSettings = React.createClass({
     this.refs.txtMapWidth.getDOMNode().value = this.props.Settings.MapWidth;
     this.refs.txtMapHeight.getDOMNode().value = this.props.Settings.MapHeight;
     this.refs.chkAllowOtherEdit.getDOMNode().value = this.props.Settings.AllowOtherEdit;
+    this.refs.txtGoogleKey.getDOMNode().value = this.props.Settings.GoogleMapApiKey;
   },
 
   render: function() {
@@ -40,6 +42,11 @@ var ConnectMapSettings = React.createClass({
           text="Allow Other Edit"
           ref="chkAllowOtherEdit"
           value={this.props.Settings.AllowOtherEdit}
+          groupClass="conInput" />
+        <TextBox 
+          text="Google Maps API Key"
+          ref="txtGoogleKey"
+          value={this.props.Settings.GoogleMapApiKey}
           groupClass="conInput" />
        <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
       </div>

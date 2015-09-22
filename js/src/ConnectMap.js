@@ -1,11 +1,10 @@
 /** @jsx React.DOM */
-var MapService = require('./service'),
-  ConnectMapSettings = require('./ConnectMapSettings'),
+var ConnectMapSettings = require('./ConnectMapSettings'),
   EditMapPoint = require('./EditMapPoint'),
   Icon = require('./forms/icons'),
   MapPointMessage = require('./MapPointMessage');
 
-var ConnectMap = React.createClass({
+var ConnectMapComponent = React.createClass({
 
   _map: {},
   _mapListener: {},
@@ -31,11 +30,12 @@ var ConnectMap = React.createClass({
   },
 
   getInitialState: function() {
-    var mapService = new MapService(jQuery, this.props.moduleId);
     return {
       moduleId: this.props.moduleId,
-      service: mapService,
-      security: {},
+      service: ConnectMap.modules[this.props.moduleId].service,
+      security: ConnectMap.modules[this.props.moduleId].security,
+      settings: ConnectMap.modules[this.props.moduleId].settings,
+      mapPoints: ConnectMap.modules[this.props.moduleId].mapPoints,
       isAdding: false
     }
   },
@@ -55,7 +55,8 @@ var ConnectMap = React.createClass({
       var newPoint = {
         Latitude: e.latLng.lat(),
         Longitude: e.latLng.lng(),
-        Message: ''
+        Message: '',
+        MapPointId: -1
       };
       React.render(
         <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} />, $('#connectMapPanel')[0]);
@@ -128,43 +129,30 @@ var ConnectMap = React.createClass({
     });
   },
 
-  componentDidMount: function() {
-    var that = this;
-    this.state.service.getInitialData(function(data) {
-      that.setState({
-        settings: data.Settings,
-        mapPoints: data.MapPoints,
-        security: data.Security
-      });
-    });
-  },
-
   shouldComponentUpdate: function(nextProps, nextState) {
     return nextState.settings !== this.state.settings;
   },
 
-  componentDidUpdate: function() {
-    if (this.state.settings !== undefined) {
-      var mapDiv = $(this.refs.mapDiv.getDOMNode());
-      mapDiv.width(this.state.settings.MapWidth);
-      mapDiv.height(this.state.settings.MapHeight);
-      this._map = new google.maps.Map(mapDiv[0], {
-        center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
-        zoom: this.state.settings.Zoom,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      var that = this;
-      $.each(this.state.mapPoints, function(index, item) {
-        that.addPointToMap(item);
-      });
-      $('.connectMapSettings').off("click");
-      $('.connectMapSettings').click(function() {
-        React.render(
-          <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
-        window.ConnectMap.slidePanel($('#connectMapPanel'));
-        return false;
-      });
-    }
+  componentDidMount: function() {
+    var mapDiv = $(this.refs.mapDiv.getDOMNode());
+    mapDiv.width(this.state.settings.MapWidth);
+    mapDiv.height(this.state.settings.MapHeight);
+    this._map = new google.maps.Map(mapDiv[0], {
+      center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
+      zoom: this.state.settings.Zoom,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var that = this;
+    $.each(this.state.mapPoints, function(index, item) {
+      that.addPointToMap(item);
+    });
+    $('.connectMapSettings').off("click");
+    $('.connectMapSettings').click(function() {
+      React.render(
+        <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
+      window.ConnectMap.slidePanel($('#connectMapPanel'));
+      return false;
+    });
   },
 
   render: function() {
@@ -200,11 +188,10 @@ var ConnectMap = React.createClass({
          {setMapLink}
          {addPointLink}
         </div>
-        
       </div>
     );
   }
 
 });
 
-module.exports = ConnectMap;
+module.exports = ConnectMapComponent;
