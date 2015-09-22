@@ -14,6 +14,7 @@ var ConnectMapHelpers = (function($) {
         $('body').css('overflow', 'hidden');
         panel.css('right', -window.innerWidth);
         panel.css('display', 'block');
+        panel.css('top', $(document).scrollTop());
         var that = this;
         panel.animate({
           right: 0
