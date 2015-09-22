@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
-var EditMapPoint = require('./EditMapPoint'),
-    ConnectMapHelpers = require('./helpers');
+var EditMapPoint = require('./EditMapPoint');
 
 var MapPointMessage = React.createClass({
 
@@ -26,7 +25,7 @@ var MapPointMessage = React.createClass({
   edit: function() {
     React.render(
       <EditMapPoint MapPoint={this.props.MapPoint} onUpdate={this.onEdit} Marker={this.props.Marker} />, $('#connectMapPanel')[0]);
-    ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+    window.ConnectMap.slidePanel($('#connectMapPanel'));
     return false;
   },
 

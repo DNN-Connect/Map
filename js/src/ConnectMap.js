@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
 var MapService = require('./service'),
-  ConnectMapHelpers = require('./helpers'),
   ConnectMapSettings = require('./ConnectMapSettings'),
   EditMapPoint = require('./EditMapPoint'),
   Icon = require('./forms/icons'),
@@ -60,7 +59,7 @@ var ConnectMap = React.createClass({
       };
       React.render(
         <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} />, $('#connectMapPanel')[0]);
-      ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+      window.ConnectMap.slidePanel($('#connectMapPanel'));
       that.stopAddingPoint();
     });
     return false;
@@ -162,7 +161,7 @@ var ConnectMap = React.createClass({
       $('.connectMapSettings').click(function() {
         React.render(
           <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
-        ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+        window.ConnectMap.slidePanel($('#connectMapPanel'));
         return false;
       });
     }

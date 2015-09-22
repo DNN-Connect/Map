@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
-var ConnectMapHelpers = require('./helpers'),
-  TextBox = require('./forms/textbox'),
+var TextBox = require('./forms/textbox'),
   CheckBox = require('./forms/checkbox');
 
 var ConnectMapSettings = React.createClass({
@@ -11,7 +10,7 @@ var ConnectMapSettings = React.createClass({
     newSettings.MapHeight = this.refs.txtMapHeight.getValue() || newSettings.MapHeight;
     newSettings.AllowOtherEdit = this.refs.chkAllowOtherEdit.getValue() || newSettings.AllowOtherEdit;
     this.props.onUpdate(newSettings);
-    ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+    window.ConnectMap.slidePanel($('#connectMapPanel'));
   },
 
   componentDidMount: function() {

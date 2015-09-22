@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
-var ConnectMapHelpers = require('./helpers'),
-    TextBlock = require('./forms/textblock');
+var TextBlock = require('./forms/textblock');
 
 var EditMapPoint = React.createClass({
 
@@ -8,7 +7,7 @@ var EditMapPoint = React.createClass({
     var newMapPoint = this.props.MapPoint;
     newMapPoint.Message = this.refs.txtMessage.getValue();
     this.props.onUpdate(newMapPoint, this.props.Marker);
-    ConnectMapHelpers.slidePanel($('#connectMapPanel'));
+    window.ConnectMap.slidePanel($('#connectMapPanel'));
   },
 
   render: function() {
