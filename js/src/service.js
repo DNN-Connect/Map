@@ -34,19 +34,6 @@ var ConnectMapService = function ($, mid) {
         this.ajaxCall('POST', 'MapPoints', 'MapPoint', null, newMapPoint, success);
     }
 
-    this.getDataPoints = function(success) {
-        this.ajaxCall('GET', 'MapPoints', 'List', null, null, success);
-    }
-    this.showUser = function(userId, success, fail) {
-        this.ajaxCall('GET', 'MapPoints', 'GetUser', userId, null, success, fail);
-    }
-    this.setMap = function(lat, lng, zoom, success) {
-        this.ajaxCall('POST', 'MapPoints', 'SetMap', null, {
-            Lat: lat,
-            Lng: lng,
-            Zoom: zoom
-        }, success);
-    }
 }
 
 module.exports = ConnectMapService;

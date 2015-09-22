@@ -12,13 +12,6 @@ namespace Connect.DNN.Modules.Map.Controllers
     {
 
         #region Service Methods
-        [HttpGet]
-        [MapAuthorize(SecurityLevel = SecurityAccessLevel.View)]
-        public HttpResponseMessage List()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, GetMapPoints(ActiveModule.ModuleID));
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
@@ -47,24 +40,6 @@ namespace Connect.DNN.Modules.Map.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, postData);
         }
 
-        public class SetMapDTO
-        {
-            public double Lat { get; set; }
-            public double Lng { get; set; }
-            public int Zoom { get; set; }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Edit)]
-        public HttpResponseMessage SetMap(SetMapDTO postData)
-        {
-            Settings.MapOriginLat = postData.Lat;
-            Settings.MapOriginLong = postData.Lng;
-            Settings.Zoom = postData.Zoom;
-            Settings.SaveSettings();
-            return Request.CreateResponse(HttpStatusCode.OK, "");
-        }
         #endregion
 
     }
