@@ -103,7 +103,7 @@ var ConnectMap = React.createClass({
   },
 
   addPointToMap: function(point) {
-    var canEdit = (this.state.security.IsPointer || this.state.security.CanEdit);
+    var canEdit = ((this.state.security.IsPointer && (point.CreatedByUserID == this.state.security.UserId || this.state.settings.AllowOtherEdit)) || this.state.security.CanEdit);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(point.Latitude, point.Longitude),
       map: this._map,
@@ -112,7 +112,7 @@ var ConnectMap = React.createClass({
     });
     var msg = $('<div id="point' + point.MapPointId + '" class="conPointMessage"></div>').appendTo('body');
     React.render(
-      <MapPointMessage MapPoint={point} Security={this.state.security} OnEdit={this.onAddPoint} Marker={marker} />,
+      <MapPointMessage MapPoint={point} CanEdit={canEdit} OnEdit={this.onAddPoint} Marker={marker} />,
       msg[0]);
     var infowindow = new google.maps.InfoWindow();
     infowindow.setContent(msg[0]);

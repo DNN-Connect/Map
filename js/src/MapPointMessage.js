@@ -32,9 +32,8 @@ var MapPointMessage = React.createClass({
 
   render: function() {
 
-    var canEdit = (this.props.Security.IsPointer | this.props.Security.CanEdit);
     var editLink;
-    if (canEdit) {
+    if (this.props.CanEdit) {
       editLink = (
         <a href="#" onClick={this.edit}>Click me</a>
         );
