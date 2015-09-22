@@ -26,7 +26,7 @@ var Input = React.createClass({
   render: function() {
     return (
       <div className={this.props.groupClass} ref="mainDiv">
-       <label htmlFor={this.props.text}>
+       <label htmlFor={this.props.text} className="conInputCheck">
         <span>{this.props.text}</span>
        </label>
        <input type="checkbox" ref="chk" checked={this.state.value} onChange={this.handleChange} />

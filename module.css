@@ -22,6 +22,11 @@ div.connectMapPanel {
     padding: 5px 0;
 }
 
+.conInput label.conInputCheck {
+    display: inline-block;
+    padding-right: 20px;
+}
+
 .conInput input[type="text"], .conInput textarea {
     display: block;
     width: calc(100% - 30px);
@@ -34,7 +39,9 @@ div.connectMapPanel {
     margin-bottom: 18px;
     padding: 8px;
 }
-
+.conSettings button {
+    margin-top: 30px;
+}
 .conIcon {
     position: relative;
     top: -44px;
@@ -52,13 +59,22 @@ div.connectMapPanel {
     width: 22px;
     height: 22px;
 }
+.conLink {
+    padding: 0px 10px 0px 5px;
+}
 .conLink svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+}
+.conLink svg path {
+    fill: #666;
 }
 .exclamation-circle path {
     fill: red;
 }
 .check-circle path {
     fill: green;
+}
+.conMgtPanel {
+    padding: 5px 0px;
 }

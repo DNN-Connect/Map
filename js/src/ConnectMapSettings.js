@@ -22,7 +22,7 @@ var ConnectMapSettings = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="conSettings">
         <TextBox 
           text="Map Width"
           ref="txtMapWidth"

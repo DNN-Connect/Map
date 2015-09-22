@@ -170,27 +170,38 @@ var ConnectMap = React.createClass({
 
   render: function() {
 
-    var editPanel = (<span />);
+    var editSettingsLink = (<span />);
+    var setMapLink = (<span />);
+    var addPointLink = (<span />);
     if (this.state.security.CanEdit) {
-      editPanel = (
-        <div>
-          <a href="#" className="conLink connectMapSettings" title="Show Settings">
-           <Icon type="map" />
-          </a>
-          <a href="#" className="conLink" onClick={this.setMap} title="Set Map">
-           <Icon type="crosshairs" />
-          </a>
-          <a href="#" className="conLink" onClick={this.addPoint} title="Add Point">
-           <Icon type="map-marker" />
-          </a>
-        </div>
+      editSettingsLink = (
+        <a href="#" className="conLink connectMapSettings" title="Show Settings">
+         <Icon type="map" />
+        </a>
+      );
+      setMapLink = (
+        <a href="#" className="conLink" onClick={this.setMap} title="Set Map">
+         <Icon type="crosshairs" />
+        </a>
+      );
+    }
+    if (this.state.security.CanEdit) {
+      addPointLink = (
+        <a href="#" className="conLink" onClick={this.addPoint} title="Add Point">
+         <Icon type="map-marker" />
+        </a>
       );
     }
 
     return (
       <div>
         <div ref="mapDiv" />
-        {editPanel}
+        <div className="conMgtPanel">
+         {editSettingsLink}
+         {setMapLink}
+         {addPointLink}
+        </div>
+        
       </div>
     );
   }
