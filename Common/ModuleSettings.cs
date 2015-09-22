@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 
@@ -9,27 +8,30 @@ namespace Connect.DNN.Modules.Map.Common
     {
 
         #region Properties
-        internal ISettingsStore Store;
-        public double MapOriginLat { get { return Store.Get(44.1); } set { Store.Set(value); } }
-        public double MapOriginLong { get { return Store.Get(3.07); } set { Store.Set(value); } }
-        public int Zoom { get { return Store.Get(8); } set { Store.Set(value); } }
-        public string MapWidth { get { return Store.Get("100%"); } set { Store.Set(value); } }
-        public string MapHeight { get { return Store.Get("500px"); } set { Store.Set(value); } }
-        public bool AllowOtherEdit { get { return Store.Get(false); } set { Store.Set(value); } }
+        internal ISettingsStore TmsStore;
+        internal ISettingsStore MsStore;
+        public double MapOriginLat { get { return TmsStore.Get(44.1); } set { TmsStore.Set(value); } }
+        public double MapOriginLong { get { return TmsStore.Get(3.07); } set { TmsStore.Set(value); } }
+        public int Zoom { get { return TmsStore.Get(8); } set { TmsStore.Set(value); } }
+        public string MapWidth { get { return TmsStore.Get("100%"); } set { TmsStore.Set(value); } }
+        public string MapHeight { get { return TmsStore.Get("500px"); } set { TmsStore.Set(value); } }
+        public bool AllowOtherEdit { get { return MsStore.Get(false); } set { MsStore.Set(value); } }
         public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
         #endregion
 
         #region .ctor
-        public ModuleSettings(int moduleId, Hashtable settings)
+        public ModuleSettings(ModuleInfo ctlModule)
         {
-            Store = new ModuleScopedSettings(moduleId, settings);
+            MsStore = new ModuleScopedSettings(ctlModule.ModuleID, ctlModule.ModuleSettings);
+            TmsStore = new TabModuleScopedSettings(ctlModule.TabModuleID, ctlModule.TabModuleSettings);
         }
         #endregion
 
         #region Public Members
         public void SaveSettings()
         {
-            Store.Save();
+            MsStore.Save();
+            TmsStore.Save();
         }
 
         public static ModuleSettings GetSettings(ModuleInfo ctlModule)
@@ -38,14 +40,14 @@ namespace Connect.DNN.Modules.Map.Common
             ModuleSettings res = null;
             try
             {
-                res = (ModuleSettings)DataCache.GetCache(CacheKey(ctlModule.ModuleID));
+                res = (ModuleSettings)DataCache.GetCache(CacheKey(ctlModule.TabModuleID));
             }
             catch (Exception ex)
             {
             }
             if (res == null)
             {
-                res = new ModuleSettings(ctlModule.ModuleID, ctlModule.ModuleSettings);
+                res = new ModuleSettings(ctlModule);
                 DataCache.SetCache(CacheKey(ctlModule.ModuleID), res);
             }
             return res;
