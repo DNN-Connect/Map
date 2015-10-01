@@ -51,7 +51,7 @@ gulp.task('build', ['assemblyInfo'], function() {
       stdout: true,
       properties: {
         Configuration: 'Release',
-        OutputPath: 'bin'
+        OutputPath: config.dnnModule.pathToAssemblies
       }
     }));
 });
@@ -84,10 +84,10 @@ gulp.task('packageInstall', ['browserify', 'build'], function() {
       .pipe(zip('Resources.zip')),
       gulp.src(config.dnnModule.pathToSupplementaryFiles + '/*.dnn')
       .pipe(manifest(config)),
-      gulp.src(['bin/*.dll',
+      gulp.src([config.dnnModule.pathToAssemblies + '/*.dll',
         config.dnnModule.pathToScripts + '/*.SqlDataProvider',
-        config.dnnModule.pathToSupplementaryFiles + 'License.txt',
-        config.dnnModule.pathToSupplementaryFiles + 'ReleaseNotes.txt'
+        config.dnnModule.pathToSupplementaryFiles + '/License.txt',
+        config.dnnModule.pathToSupplementaryFiles + '/ReleaseNotes.txt'
       ])
     )
     .pipe(zip(packageName + '_Install.zip'))
@@ -115,10 +115,10 @@ gulp.task('packageSource', ['browserify', 'build'], function() {
       .pipe(zip('Resources.zip')),
       gulp.src(config.dnnModule.pathToSupplementaryFiles + '/*.dnn')
       .pipe(manifest(config)),
-      gulp.src(['bin/*.dll',
+      gulp.src([config.dnnModule.pathToAssemblies + '/*.dll',
         config.dnnModule.pathToScripts + '/*.SqlDataProvider',
-        config.dnnModule.pathToSupplementaryFiles + 'License.txt',
-        config.dnnModule.pathToSupplementaryFiles + 'ReleaseNotes.txt'
+        config.dnnModule.pathToSupplementaryFiles + '/License.txt',
+        config.dnnModule.pathToSupplementaryFiles + '/ReleaseNotes.txt'
       ])
     )
     .pipe(zip(packageName + '_Source.zip'))
