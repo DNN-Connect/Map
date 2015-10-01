@@ -102,6 +102,12 @@ var ConnectMapComponent = React.createClass({
     });
   },
 
+  onDeletePoint: function(mapPoint, marker) {
+    this.state.service.deletePoint(mapPoint.MapPointId, function(data) {
+      marker.setMap(null);
+    });
+  },
+
   addPointToMap: function(point) {
     var canEdit = ((this.state.security.IsPointer && (point.CreatedByUserID == this.state.security.UserId || this.state.settings.AllowOtherEdit)) || this.state.security.CanEdit);
     var marker = new google.maps.Marker({
@@ -112,7 +118,7 @@ var ConnectMapComponent = React.createClass({
     });
     var msg = $('<div id="point' + point.MapPointId + '" class="conPointMessage"></div>').appendTo('body');
     React.render(
-      <MapPointMessage MapPoint={point} CanEdit={canEdit} OnEdit={this.onAddPoint} Marker={marker} />,
+      <MapPointMessage MapPoint={point} CanEdit={canEdit} OnEdit={this.onAddPoint} OnDelete={this.onDeletePoint} Marker={marker} />,
       msg[0]);
     var infowindow = new google.maps.InfoWindow();
     infowindow.setContent(msg[0]);

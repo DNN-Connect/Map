@@ -15,10 +15,10 @@ namespace Connect.DNN.Modules.Map.Controllers
             return repo.Get(moduleId);
         }
 
-        public static MapPoint GetMapPoint(int mapPointId)
+        public static MapPoint GetMapPoint(int mapPointId, int moduleId)
         {
             MapPointRepository repo = new MapPointRepository();
-            return repo.GetById(mapPointId);
+            return repo.GetById(mapPointId, moduleId);
         }
 
         public static int AddMapPoint(ref MapPointBase mapPoint, int userId)

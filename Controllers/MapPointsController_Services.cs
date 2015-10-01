@@ -24,7 +24,7 @@ namespace Connect.DNN.Modules.Map.Controllers
             }
             else
             {
-                var oldData = GetMapPoint(postData.MapPointId).GetMapPointBase();
+                var oldData = GetMapPoint(postData.MapPointId, ActiveModule.ModuleID).GetMapPointBase();
                 if (oldData.CreatedByUserID == UserInfo.UserID | Settings.AllowOtherEdit | Security.CanEdit | Security.IsAdmin)
                 {
                     oldData.Latitude = postData.Latitude;
@@ -34,10 +34,25 @@ namespace Connect.DNN.Modules.Map.Controllers
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.MethodNotAllowed, "");                   
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "");                   
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK, postData);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
+        public HttpResponseMessage Delete(int mapPointId)
+        {
+            var mapPoint = GetMapPoint(mapPointId, ActiveModule.ModuleID);
+            if (mapPoint.CreatedByUserID == UserInfo.UserID | Settings.AllowOtherEdit | Security.CanEdit |
+                Security.IsAdmin)
+            {
+                DeleteMapPoint(mapPoint);
+                return Request.CreateResponse(HttpStatusCode.Unauthorized, "");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, mapPoint);
         }
 
         #endregion

@@ -29,12 +29,21 @@ var MapPointMessage = React.createClass({
     return false;
   },
 
+  deletePoint: function() {
+    if (confirm('Do you wish to delete this point?')) {
+      this.props.OnDelete(this.props.MapPoint, this.props.Marker);
+    }
+  },
+
   render: function() {
 
     var editLink;
     if (this.props.CanEdit) {
       editLink = (
-        <a href="#" onClick={this.edit}>Click me</a>
+        <a href="#" onClick={this.edit}>Edit</a>
+        );
+      deleteLink = (
+        <a href="#" onClick={this.deletePoint}>Delete</a>
         );
     }
 
@@ -42,7 +51,7 @@ var MapPointMessage = React.createClass({
       <div>
        {this.state.mapPoint.Message}<br />
        <em>Created by {this.state.mapPoint.CreatedByUser}</em><br />
-       {editLink}
+       {editLink} {deleteLink}
       </div>
       )
   }
