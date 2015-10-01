@@ -94,13 +94,6 @@
     <Content Include="module.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Connect.Map.dnn" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BuildScripts\ModulePackage.targets" />
-    <Content Include="BuildScripts\MSBuild.Community.Tasks.Targets" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_LocalResources\Settings.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
