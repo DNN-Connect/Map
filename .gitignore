@@ -103,3 +103,7 @@ UpgradeLog*.XML
 
 node_modules
 bower_components
+_Packages
+js/*.js
+
+
