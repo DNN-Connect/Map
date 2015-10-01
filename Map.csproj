@@ -92,12 +92,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
+    <Content Include="_Installation\License.txt" />
+    <Content Include="_Installation\ReleaseNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Settings.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\SharedResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Installation\Connect.Map.dnn" />
+    <Content Include="_Installation\SQL\01.00.00.SqlDataProvider" />
+    <Content Include="_Installation\SQL\Uninstall.SqlDataProvider" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
