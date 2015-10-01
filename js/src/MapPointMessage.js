@@ -38,6 +38,7 @@ var MapPointMessage = React.createClass({
   render: function() {
 
     var editLink;
+    var deleteLink;
     if (this.props.CanEdit) {
       editLink = (
         <a href="#" onClick={this.edit}>Edit</a>

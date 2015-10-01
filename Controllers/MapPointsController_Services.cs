@@ -43,16 +43,16 @@ namespace Connect.DNN.Modules.Map.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
-        public HttpResponseMessage Delete(int mapPointId)
+        public HttpResponseMessage Delete(int id)
         {
-            var mapPoint = GetMapPoint(mapPointId, ActiveModule.ModuleID);
+            var mapPoint = GetMapPoint(id, ActiveModule.ModuleID);
             if (mapPoint.CreatedByUserID == UserInfo.UserID | Settings.AllowOtherEdit | Security.CanEdit |
                 Security.IsAdmin)
             {
-                DeleteMapPoint(mapPoint);
-                return Request.CreateResponse(HttpStatusCode.Unauthorized, "");
+                DeleteMapPoint(mapPoint.GetMapPointBase());
+                return Request.CreateResponse(HttpStatusCode.OK, "");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, mapPoint);
+            return Request.CreateResponse(HttpStatusCode.Unauthorized, mapPoint);
         }
 
         #endregion

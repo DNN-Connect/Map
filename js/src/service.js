@@ -34,8 +34,8 @@ var ConnectMapService = function ($, mid) {
         this.ajaxCall('POST', 'MapPoints', 'MapPoint', null, newMapPoint, success);
     }
 
-    this.submitPoint = function(mapPointId, success) {
-        this.ajaxCall('POST', 'MapPoints', 'Delete', mapPointId, newMapPoint, success);
+    this.deletePoint = function(mapPointId, success) {
+        this.ajaxCall('POST', 'MapPoints', 'Delete', mapPointId, null, success);
     }
 
 }
