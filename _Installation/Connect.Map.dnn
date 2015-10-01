@@ -1,84 +1,50 @@
 <dotnetnuke type="Package" version="5.0">
-  <packages>
-    <package name="Map" type="Module" version="00.00.01">
-      <friendlyName>Map</friendlyName>
-      <description>DNN Connect Map module</description>
-      <iconFile>Images/icon_extensions.gif</iconFile>
-      <owner>
-        <name>DNN Connect</name>
-        <organization>DNN Connect</organization>
-        <url>http://dnn-connect.org</url>
-        <email>no-reply@dnn-connect.org</email>
-      </owner>
-      <license src="License.txt"></license>
-      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
-      <dependencies>
-        <dependency type="CoreVersion">07.04.00</dependency>
-      </dependencies>
-      
-      <components>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\Map</basePath>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>00.00.01.SqlDataProvider</name>
-              <version>00.00.01</version>
-            </script>
-            <script type="UnInstall">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>Uninstall.SqlDataProvider</name>
-              <version>00.00.01</version>
-            </script>
-          </scripts>
-        </component>
-
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules/Map</basePath>
-            <resourceFile>
-              <name>Resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-
-        <component type="Module">
-          <desktopModule>
-            <moduleName>Connect_Map</moduleName>
-            <foldername>Connect/Map</foldername>
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>Connect Map</friendlyName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/Connect/Map/Map.html</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-               <permissions>
-                <permission code="CONNECT_MAP_MODULE" key="POINTER" name="Map Pointers"/>
-               </permissions>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="Assembly">
-          <assemblies>
-            <assembly>
-              <name>Connect.DNN.Modules.Map.dll</name>
-              <path>bin</path>
-            </assembly>
-          </assemblies>
-        </component>
-      </components>
-    </package>
-  </packages>
+ <packages>
+  <package name="Map" type="Module" version="00.00.01">
+   <friendlyName>Map</friendlyName>
+   <description>DNN Connect Map module</description>
+   <iconFile>Images/icon_extensions.gif</iconFile>
+   <owner>
+    <name>DNN Connect</name>
+    <organization>DNN Connect</organization>
+    <url>http://dnn-connect.org</url>
+    <email>no-reply@dnn-connect.org</email>
+   </owner>
+   <license src="License.txt"></license>
+   <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+   <dependencies>
+    <dependency type="CoreVersion">07.04.00</dependency>
+   </dependencies>
+   <components>
+    <component type="Module">
+     <desktopModule>
+      <moduleName>Connect_Map</moduleName>
+      <foldername>Connect/Map</foldername>
+      <supportedFeatures />
+      <moduleDefinitions>
+       <moduleDefinition>
+        <friendlyName>Connect Map</friendlyName>
+        <defaultCacheTime>0</defaultCacheTime>
+        <moduleControls>
+         <moduleControl>
+          <controlKey />
+          <controlSrc>DesktopModules/Connect/Map/Map.html</controlSrc>
+          <supportsPartialRendering>False</supportsPartialRendering>
+          <controlTitle />
+          <controlType>View</controlType>
+          <iconFile />
+          <helpUrl />
+          <viewOrder>0</viewOrder>
+         </moduleControl>
+        </moduleControls>
+        <permissions>
+         <permission code="CONNECT_MAP_MODULE" key="POINTER" name="Map Pointers"/>
+        </permissions>
+       </moduleDefinition>
+      </moduleDefinitions>
+     </desktopModule>
+    </component>
+   </components>
+  </package>
+ </packages>
 </dotnetnuke>
