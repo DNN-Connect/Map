@@ -65,12 +65,14 @@
       <HintPath>_References\System.Web.Http.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AuditableEntity.cs" />
     <Compile Include="Common\ContextSecurity.cs" />
     <Compile Include="Common\Globals.cs" />
     <Compile Include="Common\ISettingsStore.cs" />
+    <Compile Include="Common\Localization.cs" />
     <Compile Include="Common\MapApiController.cs" />
     <Compile Include="Common\MapAuthorizeAttribute.cs" />
     <Compile Include="Common\ModuleScopedSettings.cs" />
@@ -105,6 +107,9 @@
     <Content Include="_Installation\Connect.Map.dnn" />
     <Content Include="_Installation\SQL\01.00.00.SqlDataProvider" />
     <Content Include="_Installation\SQL\Uninstall.SqlDataProvider" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\ClientResources.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
