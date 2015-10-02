@@ -23,6 +23,7 @@ var EditMapPoint = React.createClass({
         <div>Latitude: {this.props.MapPoint.Latitude}</div>
         <div>Longitude: {this.props.MapPoint.Longitude}</div>
         <TextBlock 
+          className="formFocus"
           text={this.props.resources.Message}
           ref="txtMessage"
           value={this.props.MapPoint.Message}

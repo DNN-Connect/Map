@@ -29,7 +29,7 @@ var Input = React.createClass({
        <label htmlFor={this.props.text}>
         <span>{this.props.text}</span>
        </label>
-       <textarea ref="txtInput" value={this.state.value} onChange={this.handleChange} />
+       <textarea ref="txtInput" value={this.state.value} onChange={this.handleChange} className={this.props.className} />
       </div>
     );
   },

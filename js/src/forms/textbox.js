@@ -73,7 +73,8 @@ var Input = React.createClass({
          type="text"
          ref="txtInput"
          value={this.state.value}
-         onChange={this.handleChange} />
+         onChange={this.handleChange}
+         className={this.props.className} />
        <Icon type={this.state.iconState} />
       </div>
       );

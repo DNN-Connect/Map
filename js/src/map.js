@@ -74,6 +74,10 @@ var ConnectMapComponent = require('./ConnectMap'),
         panel.animate({
           right: 0
         }, 800, function() {
+          var elementsToFocus = document.getElementsByClassName("formFocus");
+          if (elementsToFocus.length > 0) {
+            elementsToFocus[0].focus();
+          }
           $('body').on("click", function(e) {
             if ($(e.target).closest('#' + panel[0].id).length == 0) {
               that.slidePanel(panel);
