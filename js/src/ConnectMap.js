@@ -19,7 +19,7 @@ var ConnectMapComponent = React.createClass({
   },
 
   setMap: function() {
-    if (confirm('You wish to set the map to this location and zoom?')) {
+    if (confirm(this.state.resources.SetMapConfirm)) {
       var newSettings = this.state.settings;
       newSettings.MapOriginLat = this._map.getCenter().lat();
       newSettings.MapOriginLong = this._map.getCenter().lng();
@@ -36,6 +36,7 @@ var ConnectMapComponent = React.createClass({
       security: ConnectMap.modules[this.props.moduleId].security,
       settings: ConnectMap.modules[this.props.moduleId].settings,
       mapPoints: ConnectMap.modules[this.props.moduleId].mapPoints,
+      resources: ConnectMap.modules[this.props.moduleId].resources,
       isAdding: false
     }
   },
@@ -59,7 +60,7 @@ var ConnectMapComponent = React.createClass({
         MapPointId: -1
       };
       React.render(
-        <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} />, $('#connectMapPanel')[0]);
+        <EditMapPoint MapPoint={newPoint} onUpdate={that.onAddPoint} resources={that.state.resources} />, $('#connectMapPanel')[0]);
       window.ConnectMap.slidePanel($('#connectMapPanel'));
       that.stopAddingPoint();
     });
@@ -118,7 +119,7 @@ var ConnectMapComponent = React.createClass({
     });
     var msg = $('<div id="point' + point.MapPointId + '" class="conPointMessage"></div>').appendTo('body');
     React.render(
-      <MapPointMessage MapPoint={point} CanEdit={canEdit} OnEdit={this.onAddPoint} OnDelete={this.onDeletePoint} Marker={marker} />,
+      <MapPointMessage MapPoint={point} CanEdit={canEdit} OnEdit={this.onAddPoint} OnDelete={this.onDeletePoint} Marker={marker} resources={this.state.resources} />,
       msg[0]);
     var infowindow = new google.maps.InfoWindow();
     infowindow.setContent(msg[0]);
@@ -155,7 +156,7 @@ var ConnectMapComponent = React.createClass({
     $('.connectMapSettings').off("click");
     $('.connectMapSettings').click(function() {
       React.render(
-        <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} />, $('#connectMapPanel')[0]);
+        <ConnectMapSettings Settings={that.state.settings} onUpdate={that.onSettingsUpdate} resources={that.state.resources} />, $('#connectMapPanel')[0]);
       window.ConnectMap.slidePanel($('#connectMapPanel'));
       return false;
     });
@@ -168,19 +169,19 @@ var ConnectMapComponent = React.createClass({
     var addPointLink = (<span />);
     if (this.state.security.CanEdit) {
       editSettingsLink = (
-        <a href="#" className="conLink connectMapSettings" title="Show Settings">
+        <a href="#" className="conLink connectMapSettings" title={this.state.resources.ShowSettings}>
          <Icon type="map" />
         </a>
       );
       setMapLink = (
-        <a href="#" className="conLink" onClick={this.setMap} title="Set Map">
+        <a href="#" className="conLink" onClick={this.setMap} title={this.state.resources.SetMap}>
          <Icon type="crosshairs" />
         </a>
       );
     }
     if (this.state.security.CanEdit) {
       addPointLink = (
-        <a href="#" className="conLink" onClick={this.addPoint} title="Add Point">
+        <a href="#" className="conLink" onClick={this.addPoint} title={this.state.resources.AddPoint}>
          <Icon type="map-marker" />
         </a>
       );

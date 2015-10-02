@@ -25,30 +25,30 @@ var ConnectMapSettings = React.createClass({
     return (
       <div className="conSettings">
         <TextBox 
-          text="Map Width"
+          text={this.props.resources.MapWidth}
           ref="txtMapWidth"
           value={this.props.Settings.MapWidth}
           regex="(\d+)(px|%)"
-          errorMessage="Should be a valid css width (in px or %)"
+          errorMessage={this.props.resources.CssSizeError}
           groupClass="conInput" />
         <TextBox 
-          text="Map Height"
+          text={this.props.resources.MapHeight}
           ref="txtMapHeight"
           value={this.props.Settings.MapHeight}
           regex="(\d+)(px|%)"
-          errorMessage="Should be a valid css width (in px or %)"
+          errorMessage={this.props.resources.CssSizeError}
           groupClass="conInput" />
         <CheckBox
-          text="Allow Other Edit"
+          text={this.props.resources.AllowOtherEdit}
           ref="chkAllowOtherEdit"
           value={this.props.Settings.AllowOtherEdit}
           groupClass="conInput" />
         <TextBox 
-          text="Google Maps API Key"
+          text={this.props.resources.GoogleMapsAPIKey}
           ref="txtGoogleKey"
           value={this.props.Settings.GoogleMapApiKey}
           groupClass="conInput" />
-       <button className="dnnPrimaryAction" onClick={this.handleUpdate}>Update</button>
+       <button className="dnnPrimaryAction" onClick={this.handleUpdate}>{this.props.resources.Update}</button>
       </div>
     );
   }

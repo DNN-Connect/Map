@@ -12,10 +12,10 @@ var EditMapPoint = React.createClass({
 
   render: function() {
 
-    var buttonText = "Update Point";
+    var buttonText = this.props.resources.UpdatePoint;
     if (this.props.MapPoint.MapPointId === undefined)
     {
-      buttonText = "Add Point";
+      buttonText = this.props.resources.AddPoint;
     }
 
     return (
@@ -23,7 +23,7 @@ var EditMapPoint = React.createClass({
         <div>Latitude: {this.props.MapPoint.Latitude}</div>
         <div>Longitude: {this.props.MapPoint.Longitude}</div>
         <TextBlock 
-          text="Message"
+          text={this.props.resources.Message}
           ref="txtMessage"
           value={this.props.MapPoint.Message}
           groupClass="conInput" />

@@ -29,6 +29,7 @@ var ConnectMapComponent = require('./ConnectMap'),
           ConnectMap.modules[moduleId].settings = data.Settings;
           ConnectMap.modules[moduleId].mapPoints = data.MapPoints;
           ConnectMap.modules[moduleId].security = data.Security;
+          ConnectMap.modules[moduleId].resources = data.ClientResources;
           if (nrMapsToLoad == 1) {
             ConnectMap.loadGoogle(ConnectMap.modules[moduleId].settings.GoogleMapApiKey);
           }
