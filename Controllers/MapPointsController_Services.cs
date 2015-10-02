@@ -17,10 +17,12 @@ namespace Connect.DNN.Modules.Map.Controllers
         [MapAuthorize(SecurityLevel = SecurityAccessLevel.Pointer)]
         public HttpResponseMessage MapPoint(MapPointBase postData)
         {
+            MapPoint returnData;
             postData.ModuleId = ActiveModule.ModuleID;
             if (postData.MapPointId == -1)
             {
                 AddMapPoint(ref postData, UserInfo.UserID);
+                returnData = GetMapPoint(postData.MapPointId, ActiveModule.ModuleID);
             }
             else
             {
@@ -31,13 +33,14 @@ namespace Connect.DNN.Modules.Map.Controllers
                     oldData.Longitude = postData.Longitude;
                     oldData.Message = postData.Message;
                     UpdateMapPoint(oldData, UserInfo.UserID);
+                    returnData = GetMapPoint(postData.MapPointId, ActiveModule.ModuleID);
                 }
                 else
                 {
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "");                   
                 }
             }
-            return Request.CreateResponse(HttpStatusCode.OK, postData);
+            return Request.CreateResponse(HttpStatusCode.OK, returnData);
         }
 
         [HttpPost]
