@@ -15,6 +15,7 @@ var ConnectMapComponent = React.createClass({
       that.setState({
         settings: data
       });
+      that.setMapSize();
     });
   },
 
@@ -27,6 +28,12 @@ var ConnectMapComponent = React.createClass({
       this.state.service.updateSettings(newSettings);
     }
     return false;
+  },
+
+  setMapSize: function() {
+    var mapDiv = $(this.refs.mapDiv.getDOMNode());
+    mapDiv.width(this.state.settings.MapWidth);
+    mapDiv.height(this.state.settings.MapHeight);
   },
 
   getInitialState: function() {
@@ -141,10 +148,8 @@ var ConnectMapComponent = React.createClass({
   },
 
   componentDidMount: function() {
-    var mapDiv = $(this.refs.mapDiv.getDOMNode());
-    mapDiv.width(this.state.settings.MapWidth);
-    mapDiv.height(this.state.settings.MapHeight);
-    this._map = new google.maps.Map(mapDiv[0], {
+    this.setMapSize();
+    this._map = new google.maps.Map(this.refs.mapDiv.getDOMNode(), {
       center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
       zoom: this.state.settings.Zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP
