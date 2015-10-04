@@ -50,7 +50,7 @@ var ConnectMapComponent = require('./ConnectMap'),
         return;
       }
       var googleScript = 'http://maps.googleapis.com/maps/api/js?callback=ConnectMap.loadMaps';
-      if (apiKey !== '') {
+      if (apiKey && apiKey !== '') {
         googleScript += '&key=' + $('.connectMap').first().data('googlekey');
       }
       ConnectMap.loadScript(googleScript);
