@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Caching;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 
@@ -40,21 +41,9 @@ namespace Connect.DNN.Modules.Map.Common
 
         public static ModuleSettings GetSettings(ModuleInfo ctlModule)
         {
-
-            ModuleSettings res = null;
-            try
-            {
-                res = (ModuleSettings)DataCache.GetCache(CacheKey(ctlModule.TabModuleID));
-            }
-            catch (Exception ex)
-            {
-            }
-            if (res == null)
-            {
-                res = new ModuleSettings(ctlModule);
-                DataCache.SetCache(CacheKey(ctlModule.ModuleID), res);
-            }
-            return res;
+            return CBO.GetCachedObject<ModuleSettings>(new CacheItemArgs(CacheKey(ctlModule.TabModuleID), 20, CacheItemPriority.AboveNormal),
+                                                       cacheItemArgs => new ModuleSettings(ctlModule),
+                                                       true);
         }
 
         public static string CacheKey(int moduleId)
