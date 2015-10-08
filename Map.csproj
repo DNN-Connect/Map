@@ -95,7 +95,7 @@
   <ItemGroup>
     <Content Include="module.css" />
     <Content Include="_Installation\License.txt" />
-    <Content Include="_Installation\ReleaseNotes.txt" />
+    <Content Include="_Installation\ReleaseNotes.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Settings.ascx.resx" />
