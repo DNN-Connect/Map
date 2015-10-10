@@ -24,7 +24,7 @@ var MapPointMessage = React.createClass({
 
   edit: function() {
     React.render(
-      <EditMapPoint MapPoint={this.props.MapPoint} onUpdate={this.onEdit} Marker={this.props.Marker} />, $('#connectMapPanel')[0]);
+      <EditMapPoint MapPoint={this.props.MapPoint} onUpdate={this.onEdit} Marker={this.props.Marker} resources={this.props.resources} />, $('#connectMapPanel')[0]);
     window.ConnectMap.slidePanel($('#connectMapPanel'));
     return false;
   },
@@ -33,6 +33,7 @@ var MapPointMessage = React.createClass({
     if (confirm(this.props.resources.DeletePointConfirm)) {
       this.props.OnDelete(this.props.MapPoint, this.props.Marker);
     }
+    return false;
   },
 
   render: function() {

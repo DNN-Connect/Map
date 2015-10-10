@@ -17,9 +17,6 @@ namespace Connect.DNN.Modules.Map.Common
 
         public static Dictionary<string, string> GetResourceFile(PortalSettings portalSettings, string resourceFile, string locale)
         {
-            //return CBO.GetCachedObject<Dictionary<string, string>>(new CacheItemArgs("Compiled-" + resourceFile + "-" + locale + "-" + portalSettings.PortalId, DataCache.ResourceFilesCacheTimeOut, DataCache.ResourceFilesCachePriority, resourceFile, locale, portalSettings),
-            //                                                       GetCompiledResourceFileCallBack,
-            //                                                       true);
             return
                 (Dictionary<string, string>) GetCompiledResourceFileCallBack(
                     new CacheItemArgs("Compiled-" + resourceFile + "-" + locale + "-" + portalSettings.PortalId,
