@@ -1,0 +1,30 @@
+{
+  "name": "map",
+  "version": "01.00.00",
+  "description": "Demo module used at DNN Connect 2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DNN-Connect/Map.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DNN-Connect/Map/issues"
+  },
+  "homepage": "https://github.com/DNN-Connect/Map#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-file-include": "^0.13.7",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "marked": "^0.3.5"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}
