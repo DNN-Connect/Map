@@ -3,7 +3,7 @@
   <package name="Map" type="Module" version="00.00.01">
    <friendlyName>Map</friendlyName>
    <description>DNN Connect Map module</description>
-   <iconFile>Images/icon_extensions.gif</iconFile>
+   <iconFile>DesktopModules/Connect/Map/map.png</iconFile>
    <owner>
     <name>DNN Connect</name>
     <organization>DNN Connect</organization>

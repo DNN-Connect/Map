@@ -1,3 +1,4 @@
-## Release Notes
-Here are some notes
+## Initial Release
+
+This is the first release of the Connect Map module.
 
