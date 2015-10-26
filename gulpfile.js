@@ -64,8 +64,16 @@ gulp.task('packageInstall', ['browserify', 'build'], function() {
   return merge(
       merge(
         gulp.src([
-          '**/*.html',
-          '**/*.resx'
+          '**/*.resx',
+          '**/*.html'
+        ], {
+          base: '.'
+        })
+        .pipe(dirFilter),
+        gulp.src([
+          '**/*.png',
+          '**/*.gif',
+          '**/*.txt'
         ], {
           base: '.'
         })
@@ -104,6 +112,8 @@ gulp.task('packageSource', ['browserify', 'build'], function() {
   var dirFilter = filter(fileTest);
   return merge(
       gulp.src(['**/*.html',
+        '**/*.png',
+        '**/*.gif',
         '**/*.css',
         'js/**/*.js',
         '**/*.??proj',
