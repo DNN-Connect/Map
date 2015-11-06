@@ -1,0 +1,7 @@
+{
+  "name": "Map",
+  "private": true,
+  "dependencies": {
+    "react": "^0.13.3"
+  }
+}
