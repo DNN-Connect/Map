@@ -7,7 +7,14 @@ namespace Connect.DNN.Modules.Map.Common
         private ModuleSettings _settings;
         public ModuleSettings Settings
         {
-            get { return _settings ?? (_settings = ModuleSettings.GetSettings(ActiveModule)); }
+            get
+            {
+                if (_settings == null)
+                {
+                    _settings = ModuleSettings.GetSettings(ActiveModule);
+                }
+                return _settings;
+            }
             set { _settings = value; }
         }
 
