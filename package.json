@@ -1,6 +1,6 @@
 {
   "name": "map",
-  "version": "01.00.00",
+  "version": "01.00.02",
   "description": "Demo module used at DNN Connect 2015",
   "dnnModule": {
     "fullName": "Connect.Map",
@@ -29,7 +29,13 @@
       "obj",
       "_Packages",
       "_Installation"
-    ]
+    ],
+    "jsLibraries": [{
+      "name": "react",
+      "devUrl": "~/DesktopModules/Connect/Map/bower_components/react/react.min.js",
+      "CDNPath": "https://cdnjs.cloudflare.com/ajax/libs/react/[version]/react.min.js",
+      "objectName": "React"
+    }]
   },
   "main": "index.js",
   "scripts": {
