@@ -47,7 +47,7 @@ gulp.task('assemblyInfo', function() {
 gulp.task('build', ['assemblyInfo'], function() {
   return gulp.src('./Map.csproj')
     .pipe(msbuild({
-      toolsVersion: 12.0,
+      toolsVersion: 14.0,
       targets: ['Clean', 'Build'],
       errorOnFail: true,
       stdout: true,
