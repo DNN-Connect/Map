@@ -27,7 +27,7 @@ namespace Connect.DNN.Modules.Map.Controllers
         [ValidateAntiForgeryToken]
         public HttpResponseMessage Update(SettingsDTO newSettings)
         {
-            var oldSettings = ModuleSettings.GetSettings(ActiveModule);
+            var oldSettings = Settings;
             oldSettings.MapHeight = newSettings.MapHeight;
             oldSettings.MapOriginLat = newSettings.MapOriginLat;
             oldSettings.MapOriginLong = newSettings.MapOriginLong;
@@ -38,7 +38,7 @@ namespace Connect.DNN.Modules.Map.Controllers
             {
                 oldSettings.GoogleMapApiKey = newSettings.GoogleMapApiKey;
             }
-            oldSettings.SaveSettings();
+            oldSettings.SaveSettings(ActiveModule);
             return Request.CreateResponse(HttpStatusCode.OK, oldSettings);
         }
         #endregion

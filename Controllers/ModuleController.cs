@@ -25,10 +25,10 @@ namespace Connect.DNN.Modules.Map.Controllers
         public HttpResponseMessage InitialData()
         {
             InitData init = new InitData();
-            init.Settings = ModuleSettings.GetSettings(ActiveModule);
+            init.Settings = Settings;
             init.MapPoints = MapPointsController.GetMapPoints(ActiveModule.ModuleID);
             init.Security = new ContextSecurity(ActiveModule);
-            init.ClientResources = Localization.GetResourceFile(PortalSettings, "/DesktopModules/Connect/Map/App_LocalResources/ClientResources.resx",
+            init.ClientResources = DotNetNuke.Services.Localization.LocalizationProvider.Instance.GetCompiledResourceFile(PortalSettings, "/DesktopModules/Connect/Map/App_LocalResources/ClientResources.resx",
                 System.Threading.Thread.CurrentThread.CurrentCulture.Name);
             return Request.CreateResponse(HttpStatusCode.OK, init);
         }
