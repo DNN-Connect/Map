@@ -64,6 +64,11 @@ gulp.task('packageInstall', ['browserify', 'build'], function() {
   return merge(
       merge(
         gulp.src([
+          '*.html'
+        ], {
+          base: '.'
+        }),
+        gulp.src([
           '**/*.resx',
           '**/*.html'
         ], {
@@ -111,6 +116,11 @@ gulp.task('packageSource', ['browserify', 'build'], function() {
   var packageName = config.dnnModule.fullName + '_' + config.version;
   var dirFilter = filter(fileTest);
   return merge(
+        gulp.src([
+          '*.html'
+        ], {
+          base: '.'
+        }),
       gulp.src(['**/*.html',
         '**/*.png',
         '**/*.gif',
