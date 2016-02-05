@@ -3,6 +3,11 @@ var TextBlock = require('./forms/textblock');
 
 var EditMapPoint = React.createClass({
 
+  getInitialState: function() {
+    return {
+    }
+  },
+
   handleUpdate: function() {
     var newMapPoint = this.props.MapPoint;
     newMapPoint.Message = this.refs.txtMessage.getValue();
