@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var Input = React.createClass({
 
   getInitialState: function() {

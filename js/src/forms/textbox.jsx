@@ -1,5 +1,4 @@
-/** @jsx React.DOM */
-var Icon = require('./icons');
+var Icon = require('./icons.jsx');
 
 var Input = React.createClass({
 

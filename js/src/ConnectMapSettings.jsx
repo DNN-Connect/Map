@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-var TextBox = require('./forms/textbox'),
-  CheckBox = require('./forms/checkbox');
+var TextBox = require('./forms/textbox.jsx'),
+  CheckBox = require('./forms/checkbox.jsx');
 
 var ConnectMapSettings = React.createClass({
 

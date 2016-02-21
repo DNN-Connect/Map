@@ -30,12 +30,14 @@
       "_Packages",
       "_Installation"
     ],
-    "jsLibraries": [{
-      "name": "react",
-      "devUrl": "~/DesktopModules/Connect/Map/bower_components/react/react.min.js",
-      "CDNPath": "https://cdnjs.cloudflare.com/ajax/libs/react/[version]/react.min.js",
-      "objectName": "React"
-    }]
+    "jsLibraries": [
+      {
+        "name": "react",
+        "devUrl": "~/DesktopModules/Connect/Map/bower_components/react/react.min.js",
+        "CDNPath": "https://cdnjs.cloudflare.com/ajax/libs/react/[version]/react.min.js",
+        "objectName": "React"
+      }
+    ]
   },
   "main": "index.js",
   "scripts": {
@@ -52,8 +54,9 @@
   },
   "homepage": "https://github.com/DNN-Connect/Map#readme",
   "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
     "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
     "gulp-dnn-manifest": "^0.1.0",
     "gulp-dotnet-assembly-info": "^0.1.11",
     "gulp-filter": "^3.0.1",
@@ -63,13 +66,16 @@
     "gulp-plumber": "^1.0.1",
     "gulp-react": "^3.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.6",
     "gulp-zip": "^3.0.2",
     "merge2": "^0.3.6",
     "react": "^0.13.3",
     "react-tools": "^0.13.3",
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "jquery": "^2.1.4"

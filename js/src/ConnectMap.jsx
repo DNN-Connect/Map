@@ -1,8 +1,7 @@
-/** @jsx React.DOM */
-var ConnectMapSettings = require('./ConnectMapSettings'),
-  EditMapPoint = require('./EditMapPoint'),
-  Icon = require('./forms/icons'),
-  MapPointMessage = require('./MapPointMessage');
+var ConnectMapSettings = require('./ConnectMapSettings.jsx'),
+  EditMapPoint = require('./EditMapPoint.jsx'),
+  Icon = require('./forms/icons.jsx'),
+  MapPointMessage = require('./MapPointMessage.jsx');
 
 var ConnectMapComponent = React.createClass({
 

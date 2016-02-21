@@ -1,6 +1,3 @@
-/** @jsx React.DOM */
-var React = require('react/addons');
-
 var Icon = React.createClass({
 
   render: function() {

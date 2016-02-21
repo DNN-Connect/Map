@@ -1,5 +1,4 @@
-/** @jsx React.DOM */
-var TextBlock = require('./forms/textblock');
+var TextBlock = require('./forms/textblock.jsx');
 
 var EditMapPoint = React.createClass({
 

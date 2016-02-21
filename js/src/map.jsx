@@ -1,5 +1,4 @@
-/** @jsx React.DOM */
-var ConnectMapComponent = require('./ConnectMap'),
+var ConnectMapComponent = require('./ConnectMap.jsx'),
   MapService = require('./service');
 
 ;

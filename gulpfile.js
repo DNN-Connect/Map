@@ -1,6 +1,11 @@
 var gulp = require('gulp'),
+  browserify = require('browserify'),
+  source = require('vinyl-source-stream'),
+  buffer = require('vinyl-buffer'),
+  sourcemaps = require('gulp-sourcemaps'),
+  reactify = require('reactify'),
+  babelify = require('babelify'),
   msbuild = require('gulp-msbuild'),
-  browserify = require('gulp-browserify'),
   minifyCss = require('gulp-minify-css'),
   uglify = require('gulp-uglify'),
   assemblyInfo = require('gulp-dotnet-assembly-info'),
@@ -15,12 +20,20 @@ var gulp = require('gulp'),
   manifest = require('gulp-dnn-manifest');
 
 gulp.task('browserify', function() {
-  gulp.src('js/src/map.js')
-    .pipe(plumber())
-    .pipe(browserify({
-      transform: 'reactify',
-      ignore: 'react'
-    }))
+  var b = browserify({
+    entries: 'js/src/map.jsx',
+    debug: true,
+    // defining transforms here will avoid crashing your stream
+    transform: [reactify, babelify]
+  });
+  return b.bundle()
+    .pipe(source('map.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        .pipe(uglify())
+        .on('error', gutil.log)
+    //.pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('js/'));
 });
 

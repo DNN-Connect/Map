@@ -1,5 +1,4 @@
-/** @jsx React.DOM */
-var EditMapPoint = require('./EditMapPoint');
+var EditMapPoint = require('./EditMapPoint.jsx');
 
 var MapPointMessage = React.createClass({
 
