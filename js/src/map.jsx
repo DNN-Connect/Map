@@ -4,7 +4,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
 ;
 (function($, window, document, undefined) {
 
-  $(document).ready(function() {
+  $(document).ready(() => {
     if ($('#connectMapPanel').length == 0) {
       $('body').append('<div id="connectMapPanel" class="connectMapPanel"></div>');
     };
@@ -18,13 +18,13 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
 
     loadData() {
       this.nrMapsToLoad = $('.connectMap').length;
-      $('.connectMap').each(function(i, el) {
+      $('.connectMap').each((i, el) => {
         var moduleId = $(el).data('moduleid');
         var newModule = {
           service: new MapService($, moduleId)
         };
         ConnectMap.modules[moduleId] = newModule;
-        ConnectMap.modules[moduleId].service.getInitialData(function(data) {
+        ConnectMap.modules[moduleId].service.getInitialData((data) => {
           ConnectMap.modules[moduleId].settings = data.Settings;
           ConnectMap.modules[moduleId].mapPoints = data.MapPoints;
           ConnectMap.modules[moduleId].security = data.Security;
@@ -33,12 +33,12 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
             ConnectMap.loadGoogle(ConnectMap.modules[moduleId].settings.GoogleMapApiKey);
           }
           this.nrMapsToLoad -= 1;
-        }.bind(this));
-      }.bind(this));
+        });
+      });
     },
 
     loadMaps() {
-      $('.connectMap').each(function(i, el) {
+      $('.connectMap').each((i, el) => {
         var moduleId = $(el).data('moduleid');
         React.render(<ConnectMapComponent moduleId={moduleId} />, el);
       });
@@ -60,7 +60,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
         $('body').off("click");
         panel.animate({
           right: -window.innerWidth
-        }, 800, function() {
+        }, 800, () => {
           panel.css('display', 'none');
           $('body').css('overflow', 'auto');
         });
@@ -72,12 +72,12 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
         var that = this;
         panel.animate({
           right: 0
-        }, 800, function() {
+        }, 800, () => {
           var elementsToFocus = document.getElementsByClassName("formFocus");
           if (elementsToFocus.length > 0) {
             elementsToFocus[0].focus();
           }
-          $('body').on("click", function(e) {
+          $('body').on("click", (e) => {
             if ($(e.target).closest('#' + panel[0].id).length == 0) {
               that.slidePanel(panel);
             }
@@ -88,7 +88,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
 
     formatString(format) {
       var args = Array.prototype.slice.call(arguments, 1);
-      return format.replace(/{(\d+)}/g, function(match, number) {
+      return format.replace(/{(\d+)}/g, (match, number) => {
         return typeof args[number] != 'undefined' ? args[number] : match;
       });
     },
@@ -101,7 +101,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
       s = document.createElement('script');
       s.type = 'text/javascript';
       s.src = src;
-      s.onload = s.onreadystatechange = function() {
+      s.onload = s.onreadystatechange = () => {
         if (!r && (!this.readyState || this.readyState == 'complete')) {
           r = true;
           if (callback !== undefined) {

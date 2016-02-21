@@ -67,25 +67,25 @@ module.exports = React.createClass({
       zoom: this.state.settings.Zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    $.each(this.state.mapPoints, function(index, item) {
+    $.each(this.state.mapPoints, (index, item) => {
       this.addPointToMap(item);
-    }.bind(this));
+    });
     $('.connectMapSettings').off("click");
-    $('.connectMapSettings').click(function() {
+    $('.connectMapSettings').click(() => {
       React.render(
         <ConnectMapSettings Settings={this.state.settings} onUpdate={this.onSettingsUpdate} resources={this.resources} />, $('#connectMapPanel')[0]);
       window.ConnectMap.slidePanel($('#connectMapPanel'));
       return false;
-    }.bind(this));
+    });
   },
 
   onSettingsUpdate(newSettings) {
-    this.service.updateSettings(newSettings, function(data) {
+    this.service.updateSettings(newSettings, (data) => {
       this.setState({
         settings: data
       });
       this.setMapSize();
-    }.bind(this));
+    });
   },
 
   setMap() {
@@ -115,7 +115,7 @@ module.exports = React.createClass({
     this.setState({
       isAdding: true
     });
-    this._mapListener = google.maps.event.addListener(this._map, 'click', function(e) {
+    this._mapListener = google.maps.event.addListener(this._map, 'click', (e) => {
       var newPoint = {
         Latitude: e.latLng.lat(),
         Longitude: e.latLng.lng(),
@@ -126,7 +126,7 @@ module.exports = React.createClass({
         <EditMapPoint MapPoint={newPoint} onUpdate={this.onAddPoint} resources={this.resources} />, $('#connectMapPanel')[0]);
       window.ConnectMap.slidePanel($('#connectMapPanel'));
       this.stopAddingPoint();
-    }.bind(this));
+    });
     return false;
   },
 
@@ -142,7 +142,7 @@ module.exports = React.createClass({
   },
 
   onAddPoint(newMapPoint, marker) {
-    this.service.submitPoint(newMapPoint, function(data) {
+    this.service.submitPoint(newMapPoint, (data) => {
       if (marker === undefined) {
         this.addPointToMap(data);
         var newPoints = this.state.mapPoints;
@@ -161,11 +161,11 @@ module.exports = React.createClass({
           mapPoints: newPoints
         });
       }
-    }.bind(this));
+    });
   },
 
   onDeletePoint(mapPoint, marker) {
-    this.service.deletePoint(mapPoint.MapPointId, function(data) {
+    this.service.deletePoint(mapPoint.MapPointId, (data) => {
       marker.setMap(null);
     });
   },
@@ -185,15 +185,15 @@ module.exports = React.createClass({
     var infowindow = new google.maps.InfoWindow();
     infowindow.setContent(msg[0]);
     msg.remove();
-    google.maps.event.addListener(marker, 'click', function(e) {
+    google.maps.event.addListener(marker, 'click', (e) => {
       infowindow.open(this._map, marker);
-    }.bind(this));
-    google.maps.event.addListener(marker, 'dragend', function(e) {
+    });
+    google.maps.event.addListener(marker, 'dragend', (e) => {
       var changedPoint = marker.mapPoint;
       changedPoint.Latitude = e.latLng.lat();
       changedPoint.Longitude = e.latLng.lng();
       this.onAddPoint(changedPoint, marker);
-    }.bind(this));
+    });
   }
 
 });
