@@ -16,8 +16,8 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
     googleLoaded: false,
     nrMapsToLoad: 0,
 
-    loadData: function() {
-      nrMapsToLoad = $('.connectMap').length;
+    loadData() {
+      this.nrMapsToLoad = $('.connectMap').length;
       $('.connectMap').each(function(i, el) {
         var moduleId = $(el).data('moduleid');
         var newModule = {
@@ -29,22 +29,22 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
           ConnectMap.modules[moduleId].mapPoints = data.MapPoints;
           ConnectMap.modules[moduleId].security = data.Security;
           ConnectMap.modules[moduleId].resources = data.ClientResources;
-          if (nrMapsToLoad == 1) {
+          if (this.nrMapsToLoad == 1) {
             ConnectMap.loadGoogle(ConnectMap.modules[moduleId].settings.GoogleMapApiKey);
           }
-          nrMapsToLoad -= 1;
-        });
-      });
+          this.nrMapsToLoad -= 1;
+        }.bind(this));
+      }.bind(this));
     },
 
-    loadMaps: function() {
+    loadMaps() {
       $('.connectMap').each(function(i, el) {
         var moduleId = $(el).data('moduleid');
         React.render(<ConnectMapComponent moduleId={moduleId} />, el);
       });
     },
 
-    loadGoogle: function(apiKey) {
+    loadGoogle(apiKey) {
       if (ConnectMap.googleLoaded) {
         return;
       }
@@ -55,7 +55,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
       ConnectMap.loadScript(googleScript);
     },
 
-    slidePanel: function(panel) {
+    slidePanel(panel) {
       if (panel.css('display') == 'block') {
         $('body').off("click");
         panel.animate({
@@ -86,14 +86,14 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
       }
     },
 
-    formatString: function(format) {
+    formatString(format) {
       var args = Array.prototype.slice.call(arguments, 1);
       return format.replace(/{(\d+)}/g, function(match, number) {
         return typeof args[number] != 'undefined' ? args[number] : match;
       });
     },
 
-    loadScript: function(src, callback) {
+    loadScript(src, callback) {
       var s,
         r,
         t;

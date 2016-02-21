@@ -3,12 +3,12 @@ var ConnectMapSettings = require('./ConnectMapSettings.jsx'),
   Icon = require('./forms/icons.jsx'),
   MapPointMessage = require('./MapPointMessage.jsx');
 
-var ConnectMapComponent = React.createClass({
+module.exports = React.createClass({
 
   _map: {},
   _mapListener: {},
 
-  getInitialState: function() {
+  getInitialState() {
     this.security = ConnectMap.modules[this.props.moduleId].security;
     this.service = ConnectMap.modules[this.props.moduleId].service;
     this.resources = ConnectMap.modules[this.props.moduleId].resources;
@@ -20,7 +20,7 @@ var ConnectMapComponent = React.createClass({
     }
   },
 
-  render: function() {
+  render() {
     var editSettingsLink = (<span />);
     var setMapLink = (<span />);
     var addPointLink = (<span />);
@@ -56,11 +56,11 @@ var ConnectMapComponent = React.createClass({
     );
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return nextState.settings !== this.state.settings;
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.setMapSize();
     this._map = new google.maps.Map(this.refs.mapDiv.getDOMNode(), {
       center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
@@ -79,7 +79,7 @@ var ConnectMapComponent = React.createClass({
     }.bind(this));
   },
 
-  onSettingsUpdate: function(newSettings) {
+  onSettingsUpdate(newSettings) {
     this.service.updateSettings(newSettings, function(data) {
       this.setState({
         settings: data
@@ -88,7 +88,7 @@ var ConnectMapComponent = React.createClass({
     }.bind(this));
   },
 
-  setMap: function() {
+  setMap() {
     if (confirm(this.resources.SetMapConfirm)) {
       var newSettings = this.state.settings;
       newSettings.MapOriginLat = this._map.getCenter().lat();
@@ -99,13 +99,13 @@ var ConnectMapComponent = React.createClass({
     return false;
   },
 
-  setMapSize: function() {
+  setMapSize() {
     var mapDiv = $(this.refs.mapDiv.getDOMNode());
     mapDiv.width(this.state.settings.MapWidth);
     mapDiv.height(this.state.settings.MapHeight);
   },
 
-  addPoint: function() {
+  addPoint() {
     if (this.state.isAdding) {
       return this.stopAddingPoint();
     }
@@ -130,7 +130,7 @@ var ConnectMapComponent = React.createClass({
     return false;
   },
 
-  stopAddingPoint: function() {
+  stopAddingPoint() {
     this._map.setOptions({
       draggableCursor: 'grab'
     });
@@ -141,7 +141,7 @@ var ConnectMapComponent = React.createClass({
     return false;
   },
 
-  onAddPoint: function(newMapPoint, marker) {
+  onAddPoint(newMapPoint, marker) {
     this.service.submitPoint(newMapPoint, function(data) {
       if (marker === undefined) {
         this.addPointToMap(data);
@@ -164,13 +164,13 @@ var ConnectMapComponent = React.createClass({
     }.bind(this));
   },
 
-  onDeletePoint: function(mapPoint, marker) {
+  onDeletePoint(mapPoint, marker) {
     this.service.deletePoint(mapPoint.MapPointId, function(data) {
       marker.setMap(null);
     });
   },
 
-  addPointToMap: function(point) {
+  addPointToMap(point) {
     var canEdit = ((this.security.IsPointer && (point.CreatedByUserID == this.security.UserId || this.state.settings.AllowOtherEdit)) || this.security.CanEdit);
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(point.Latitude, point.Longitude),
@@ -197,5 +197,3 @@ var ConnectMapComponent = React.createClass({
   }
 
 });
-
-module.exports = ConnectMapComponent;

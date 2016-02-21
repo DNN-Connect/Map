@@ -1,41 +1,41 @@
 var EditMapPoint = require('./EditMapPoint.jsx');
 
-var MapPointMessage = React.createClass({
+module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       mapPoint: this.props.MapPoint
     }
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       mapPoint: nextProps.MapPoint
     });
   },
 
-  onEdit: function(newMapPoint, marker) {
+  onEdit(newMapPoint, marker) {
     this.setState({
       mapPoint: newMapPoint
     });
     this.props.OnEdit(newMapPoint, marker);
   },
 
-  edit: function() {
+  edit() {
     React.render(
       <EditMapPoint MapPoint={this.props.MapPoint} onUpdate={this.onEdit} Marker={this.props.Marker} resources={this.props.resources} />, $('#connectMapPanel')[0]);
     window.ConnectMap.slidePanel($('#connectMapPanel'));
     return false;
   },
 
-  deletePoint: function() {
+  deletePoint() {
     if (confirm(this.props.resources.DeletePointConfirm)) {
       this.props.OnDelete(this.props.MapPoint, this.props.Marker);
     }
     return false;
   },
 
-  render: function() {
+  render() {
 
     var editLink;
     var deleteLink;
@@ -58,5 +58,3 @@ var MapPointMessage = React.createClass({
   }
 
 });
-
-module.exports = MapPointMessage;

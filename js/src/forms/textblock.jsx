@@ -1,28 +1,28 @@
-var Input = React.createClass({
+module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       value: this.props.value
     }
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.value
     });
   },
 
-  handleChange: function(e) {
+  handleChange(e) {
     this.setState({
       value: e.target.value
     });
   },
 
-  getValue: function() {
+  getValue() {
     return this.refs.txtInput.getDOMNode().value;
   },
 
-  render: function() {
+  render() {
     return (
       <div className={this.props.groupClass} ref="mainDiv">
        <label htmlFor={this.props.text}>
@@ -34,5 +34,3 @@ var Input = React.createClass({
   },
 
 });
-
-module.exports = Input;

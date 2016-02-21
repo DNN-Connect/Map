@@ -1,14 +1,14 @@
 var TextBox = require('./forms/textbox.jsx'),
   CheckBox = require('./forms/checkbox.jsx');
 
-var ConnectMapSettings = React.createClass({
+module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
     }
   },
 
-  render: function() {
+  render() {
     return (
       <div className="conSettings">
         <TextBox 
@@ -40,14 +40,14 @@ var ConnectMapSettings = React.createClass({
     );
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.refs.txtMapWidth.getDOMNode().value = this.props.Settings.MapWidth;
     this.refs.txtMapHeight.getDOMNode().value = this.props.Settings.MapHeight;
     this.refs.chkAllowOtherEdit.getDOMNode().value = this.props.Settings.AllowOtherEdit;
     this.refs.txtGoogleKey.getDOMNode().value = this.props.Settings.GoogleMapApiKey;
   },
 
-  handleUpdate: function() {
+  handleUpdate() {
     var newSettings = this.props.Settings;
     newSettings.MapWidth = this.refs.txtMapWidth.getValue() || newSettings.MapWidth;
     newSettings.MapHeight = this.refs.txtMapHeight.getValue() || newSettings.MapHeight;
@@ -58,5 +58,3 @@ var ConnectMapSettings = React.createClass({
   }
 
 });
-
-module.exports = ConnectMapSettings;

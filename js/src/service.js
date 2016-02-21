@@ -1,4 +1,4 @@
-var ConnectMapService = function ($, mid) {
+module.exports = function ($, mid) {
     var moduleId = mid;
     var baseServicepath = $.dnnSF(moduleId).getServiceRoot('Connect/Map');
 
@@ -39,5 +39,3 @@ var ConnectMapService = function ($, mid) {
     }
 
 }
-
-module.exports = ConnectMapService;

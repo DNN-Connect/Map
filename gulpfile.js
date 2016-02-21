@@ -22,10 +22,9 @@ var gulp = require('gulp'),
 gulp.task('browserify', function() {
   var b = browserify({
     entries: 'js/src/map.jsx',
-    debug: true,
-    // defining transforms here will avoid crashing your stream
-    transform: [reactify, babelify]
+    debug: true
   });
+  b.transform("babelify", {presets: ["es2015", "react"]});
   return b.bundle()
     .pipe(source('map.js'))
     .pipe(buffer())

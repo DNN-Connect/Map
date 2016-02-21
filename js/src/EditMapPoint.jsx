@@ -1,20 +1,20 @@
 var TextBlock = require('./forms/textblock.jsx');
 
-var EditMapPoint = React.createClass({
+module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
     }
   },
 
-  handleUpdate: function() {
+  handleUpdate() {
     var newMapPoint = this.props.MapPoint;
     newMapPoint.Message = this.refs.txtMessage.getValue();
     this.props.onUpdate(newMapPoint, this.props.Marker);
     window.ConnectMap.slidePanel($('#connectMapPanel'));
   },
 
-  render: function() {
+  render() {
 
     var buttonText = this.props.resources.UpdatePoint;
     if (this.props.MapPoint.MapPointId === undefined)
@@ -38,5 +38,3 @@ var EditMapPoint = React.createClass({
   }
 
 });
-
-module.exports = EditMapPoint;

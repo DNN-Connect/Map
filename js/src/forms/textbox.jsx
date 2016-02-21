@@ -1,15 +1,15 @@
 var Icon = require('./icons.jsx');
 
-var Input = React.createClass({
+module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       value: this.props.value,
       iconState: this.getIconState(this.props.value)
     }
   },
 
-  requiredPassed: function(input) {
+  requiredPassed(input) {
     if (this.props.required === undefined) {
       return true;
     } else {
@@ -17,7 +17,7 @@ var Input = React.createClass({
     }
   },
 
-  regexPassed: function(input) {
+  regexPassed(input) {
     if (this.props.regex === undefined) {
       return true;
     } else {
@@ -26,14 +26,14 @@ var Input = React.createClass({
     }
   },
 
-  handleChange: function(e) {
+  handleChange(e) {
     this.setState({
       value: e.target.value,
       iconState: this.getIconState(e.target.value)
     });
   },
 
-  getValue: function() {
+  getValue() {
     if (this.state.iconState == 'check-circle') {
       return this.state.value;
     } else {
@@ -41,7 +41,7 @@ var Input = React.createClass({
     }
   },
 
-  getIconState: function(input) {
+  getIconState(input) {
     if (this.regexPassed(input) && this.requiredPassed(input)) {
       return 'check-circle';
     } else {
@@ -49,7 +49,7 @@ var Input = React.createClass({
     }
   },
 
-  setIconTitle: function() {
+  setIconTitle() {
     var svg = $(this.refs.mainDiv.getDOMNode()).children('svg')[0];
     if (this.state.iconState == 'check-circle') {
       svg.setAttribute('title', 'OK');
@@ -58,11 +58,11 @@ var Input = React.createClass({
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.setIconTitle();
   },
 
-  render: function() {
+  render() {
     return (
       <div className={this.props.groupClass} ref="mainDiv">
        <label htmlFor={this.props.text}>
@@ -79,10 +79,8 @@ var Input = React.createClass({
       );
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     this.setIconTitle();
   }
 
 });
-
-module.exports = Input;

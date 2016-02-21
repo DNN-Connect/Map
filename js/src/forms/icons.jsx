@@ -1,6 +1,6 @@
-var Icon = React.createClass({
+module.exports = React.createClass({
 
-  render: function() {
+  render() {
     switch(this.props.type) {
 
       case 'map-marker':
@@ -67,5 +67,3 @@ var Icon = React.createClass({
   }
 
 });
-
-module.exports = Icon;
