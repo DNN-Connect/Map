@@ -88,6 +88,7 @@
     <Compile Include="Repositories\MapPointRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Map.html" />
     <Content Include="module.css" />
     <Content Include="_Installation\License.txt" />
     <Content Include="_Installation\ReleaseNotes.md" />
