@@ -17,6 +17,8 @@ namespace Connect.DNN.Modules.Map.Common
         public string MapHeight { get; set; } = "500px";
         [ModuleSetting]
         public bool AllowOtherEdit { get; set; } = false;
+        [ModuleSetting]
+        public string MapType { get; set; } = "ROADMAP";
         [PortalSetting(Prefix = "ConnectMap_")]
         public string GoogleMapApiKey { get; set; } = "";
         public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
@@ -27,7 +29,8 @@ namespace Connect.DNN.Modules.Map.Common
             return repo.GetSettings(module);
         }
 
-        public void SaveSettings(ModuleInfo module) {
+        public void SaveSettings(ModuleInfo module)
+        {
             var repo = new ModuleSettingsRepository();
             repo.SaveSettings(module, this);
         }

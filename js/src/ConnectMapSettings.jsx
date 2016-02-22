@@ -1,5 +1,6 @@
 var TextBox = require('./forms/textbox.jsx'),
-  CheckBox = require('./forms/checkbox.jsx');
+  CheckBox = require('./forms/checkbox.jsx'),
+  DropDown = require('./forms/dropdown.jsx');
 
 module.exports = React.createClass({
 
@@ -35,6 +36,12 @@ module.exports = React.createClass({
           ref="txtGoogleKey"
           value={this.props.Settings.GoogleMapApiKey}
           groupClass="conInput" />
+        <DropDown
+          text={this.props.resources.MapType}
+          ref="ddMapType"
+          value={this.props.Settings.MapType}
+          options={['ROADMAP','SATELLITE','HYBRID','TERRAIN']}
+          groupClass="conInput" />
        <button className="dnnPrimaryAction" onClick={this.handleUpdate}>{this.props.resources.Update}</button>
       </div>
     );
@@ -53,6 +60,7 @@ module.exports = React.createClass({
     newSettings.MapHeight = this.refs.txtMapHeight.getValue() || newSettings.MapHeight;
     newSettings.AllowOtherEdit = this.refs.chkAllowOtherEdit.getValue() || newSettings.AllowOtherEdit;
     newSettings.GoogleMapApiKey = this.refs.txtGoogleKey.getValue();
+    newSettings.MapType = this.refs.ddMapType.getValue();
     this.props.onUpdate(newSettings);
     window.ConnectMap.slidePanel($('#connectMapPanel'));
   }

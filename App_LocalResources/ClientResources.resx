@@ -144,6 +144,9 @@
   <data name="MapHeight" xml:space="preserve">
     <value>Map Height</value>
   </data>
+  <data name="MapType" xml:space="preserve">
+    <value>Map Type</value>
+  </data>
   <data name="MapWidth" xml:space="preserve">
     <value>Map Width</value>
   </data>

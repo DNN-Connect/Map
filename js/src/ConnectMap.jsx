@@ -65,7 +65,7 @@ module.exports = React.createClass({
     this._map = new google.maps.Map(this.refs.mapDiv.getDOMNode(), {
       center: new google.maps.LatLng(this.state.settings.MapOriginLat, this.state.settings.MapOriginLong),
       zoom: this.state.settings.Zoom,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId[this.state.settings.MapType]
     });
     $.each(this.state.mapPoints, (index, item) => {
       this.addPointToMap(item);
@@ -85,6 +85,7 @@ module.exports = React.createClass({
         settings: data
       });
       this.setMapSize();
+      this._map.setMapTypeId(google.maps.MapTypeId[data.MapType]);
     });
   },
 
