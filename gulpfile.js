@@ -25,18 +25,18 @@ gulp.task('browserify', function() {
   });
   b.transform("babelify", {presets: ["es2015", "react"]});
   return b.bundle()
-    .pipe(source('map.js'))
+    .pipe(source('Map.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
         // Add transformation tasks to the pipeline here.
         .pipe(uglify())
         .on('error', gutil.log)
     //.pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('js/'));
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('js/src/**/*.js', ['browserify']);
+  gulp.watch('js/src/**/*.js*', ['browserify']);
 });
 
 gulp.task('assemblyInfo', function() {
@@ -75,11 +75,6 @@ gulp.task('packageInstall', ['browserify', 'build'], function() {
   return merge(
       merge(
         gulp.src([
-          '*.html'
-        ], {
-          base: '.'
-        }),
-        gulp.src([
           '**/*.resx',
           '**/*.html'
         ], {
@@ -103,7 +98,7 @@ gulp.task('packageInstall', ['browserify', 'build'], function() {
           base: '.'
         })
         .pipe(uglify().on('error', gutil.log)),
-        gulp.src(['js/*.min.js'], {
+        gulp.src(['Map.js', 'js/*.min.js'], {
           base: '.'
         })
       )
