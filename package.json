@@ -1,6 +1,6 @@
 {
   "name": "map",
-  "version": "01.00.05",
+  "version": "01.00.06",
   "description": "Demo module used at DNN Connect 2015",
   "dnnModule": {
     "fullName": "Connect.Map",
