@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DNN Connect")]
 [assembly: AssemblyProduct("Map")]
-[assembly: AssemblyCopyright("Copyright 2016 by DNN Connect")]
+[assembly: AssemblyCopyright("Copyright 2018 by DNN Connect")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("01.00.05")]
-[assembly: AssemblyFileVersion("01.00.05")]
+[assembly: AssemblyVersion("01.00.06")]
+[assembly: AssemblyFileVersion("01.00.06")]

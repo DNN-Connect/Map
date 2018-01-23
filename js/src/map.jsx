@@ -48,7 +48,7 @@ var ConnectMapComponent = require('./ConnectMap.jsx'),
       if (ConnectMap.googleLoaded) {
         return;
       }
-      var googleScript = 'http://maps.googleapis.com/maps/api/js?callback=ConnectMap.loadMaps';
+      var googleScript = location.protocol + '//maps.googleapis.com/maps/api/js?callback=ConnectMap.loadMaps';
       if (apiKey && apiKey !== '') {
         googleScript += '&key=' + $('.connectMap').first().data('googlekey');
       }

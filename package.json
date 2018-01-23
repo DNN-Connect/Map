@@ -1,84 +1,82 @@
 {
-  "name": "map",
-  "version": "01.00.06",
-  "description": "Demo module used at DNN Connect 2015",
-  "dnnModule": {
-    "fullName": "Connect.Map",
-    "friendlyName": "Map Module",
-    "packageName": "Connect_Map",
-    "owner": {
-      "name": "Peter Donker",
-      "organization": "DNN Connect",
-      "url": "http://dnn-connect.org",
-      "email": "peter@bring2mind.net"
+    "name": "map",
+    "version": "01.00.07",
+    "description": "Demo module used at DNN Connect 2015",
+    "dnnModule": {
+        "fullName": "Connect.Map",
+        "friendlyName": "Map Module",
+        "packageName": "Connect_Map",
+        "owner": {
+            "name": "Peter Donker",
+            "organization": "DNN Connect",
+            "url": "http://dnn-connect.org",
+            "email": "peter@bring2mind.net"
+        },
+        "module": {
+            "packageName": "Connect_Map",
+            "folderName": "Connect/Map",
+            "azureCompatible": "true",
+            "iconFile": "DesktopModules\\Connect\\Map\\map.png"
+        },
+        "tempPath": "./package",
+        "packagesPath": "./_Packages",
+        "pathToAssemblies": "./bin",
+        "pathToScripts": "./_Installation/SQL",
+        "pathToSupplementaryFiles": "./_Installation",
+        "excludeFilter": [
+            "node_modules",
+            "bin",
+            "obj",
+            "_Packages",
+            "_Installation"
+        ],
+        "jsLibraries": [{
+            "name": "react",
+            "devUrl": "~/DesktopModules/Connect/Map/bower_components/react/react.min.js",
+            "CDNPath": "https://cdnjs.cloudflare.com/ajax/libs/react/[version]/react.min.js",
+            "objectName": "React"
+        }]
     },
-    "module": {
-      "packageName": "Connect_Map",
-      "folderName": "Connect/Map",
-      "azureCompatible": "true",
-      "iconFile": "DesktopModules\\Connect\\Map\\map.png"
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "tempPath": "./package",
-    "packagesPath": "./_Packages",
-    "pathToAssemblies": "./bin",
-    "pathToScripts": "./_Installation/SQL",
-    "pathToSupplementaryFiles": "./_Installation",
-    "excludeFilter": [
-      "node_modules",
-      "bin",
-      "obj",
-      "_Packages",
-      "_Installation"
-    ],
-    "jsLibraries": [
-      {
-        "name": "react",
-        "devUrl": "~/DesktopModules/Connect/Map/bower_components/react/react.min.js",
-        "CDNPath": "https://cdnjs.cloudflare.com/ajax/libs/react/[version]/react.min.js",
-        "objectName": "React"
-      }
-    ]
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DNN-Connect/Map.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DNN-Connect/Map/issues"
-  },
-  "homepage": "https://github.com/DNN-Connect/Map#readme",
-  "devDependencies": {
-    "babel-preset-es2015": "^6.5.0",
-    "babel-preset-react": "^6.5.0",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
-    "gulp": "^3.9.0",
-    "gulp-dnn-manifest": "^0.1.0",
-    "gulp-dotnet-assembly-info": "^0.1.11",
-    "gulp-filter": "^3.0.1",
-    "gulp-markdown": "^1.1.0",
-    "gulp-minify-css": "^1.2.1",
-    "gulp-msbuild": "^0.2.13",
-    "gulp-plumber": "^1.0.1",
-    "gulp-react": "^3.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.4.1",
-    "gulp-util": "^3.0.6",
-    "gulp-zip": "^3.0.2",
-    "merge2": "^0.3.6",
-    "react": "^0.13.3",
-    "react-tools": "^0.13.3",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "dependencies": {
-    "jquery": "^2.1.4"
-  }
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DNN-Connect/Map.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DNN-Connect/Map/issues"
+    },
+    "homepage": "https://github.com/DNN-Connect/Map#readme",
+    "devDependencies": {
+        "babel-preset-es2015": "^6.5.0",
+        "babel-preset-react": "^6.5.0",
+        "babelify": "^7.2.0",
+        "browserify": "^13.0.0",
+        "gulp": "^3.9.0",
+        "gulp-dnn-manifest": "^0.1.0",
+        "gulp-dotnet-assembly-info": "^0.1.11",
+        "gulp-filter": "^3.0.1",
+        "gulp-markdown": "^1.1.0",
+        "gulp-minify-css": "^1.2.1",
+        "gulp-msbuild": "^0.2.13",
+        "gulp-plumber": "^1.0.1",
+        "gulp-react": "^3.0.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-uglify": "^1.4.1",
+        "gulp-util": "^3.0.6",
+        "gulp-zip": "^3.0.2",
+        "merge2": "^0.3.6",
+        "react": "^0.13.3",
+        "react-tools": "^0.13.3",
+        "vinyl-buffer": "^1.0.0",
+        "vinyl-source-stream": "^1.1.0"
+    },
+    "dependencies": {
+        "jquery": "^2.1.4"
+    }
 }
