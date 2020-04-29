@@ -77,6 +77,6 @@
         "vinyl-source-stream": "^1.1.0"
     },
     "dependencies": {
-        "jquery": "^2.1.4"
+        "jquery": "^3.5.0"
     }
 }
